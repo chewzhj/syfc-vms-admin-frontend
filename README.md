@@ -1,4 +1,4 @@
-## MiniMetrics FrontEnd React App
+## SYFC VMS Admin FrontEnd React App
 Will update this readme if we need more FAQ.
 
 ### Setup Information
@@ -40,6 +40,8 @@ Router defines the URL routes of the application
 Constants are action names
 ##### `views`
 Views are all the JSX files
+
+---
 
 ##### Other React Information available below
 
