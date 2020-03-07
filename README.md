@@ -13,6 +13,36 @@ To run the React App, run `npm start` on the terminal.
 If there are (or arent) any changes to the packages used (when cloning from github), run `npm install` again to update the packages.
 
 Then run the React App with `npm start`
+Hopefully your editor has JSX/ES2015 support so it looks nice.
+
+### Folder Structure
+
+Below shows the folder structure for a React App using Redux.
+All the files, similar to a typical React App, will be found in `src`
+
+##### `actions`
+Redux Actions go here
+##### `api`
+API setup files and calls are here
+##### `assets`
+Images, CSS files, and other references
+##### `components`
+Reused Components (Sidebar, header, reused forms) go here
+##### `containers`
+Containers that connect views to actions go here
+##### `phrases`
+Phrases are words shown on the screen. Important for localization
+##### `reducers`
+Reducers define the state changes from actions
+##### `router`
+Router defines the URL routes of the application
+##### `variables/constants`
+Constants are action names
+##### `views`
+Views are all the JSX files
+
+##### Other React Information available below
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
