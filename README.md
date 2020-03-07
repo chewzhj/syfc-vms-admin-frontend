@@ -1,4 +1,4 @@
-## MiniMetrics FrontEnd React App
+## SYFC VMS Admin FrontEnd React App
 Will update this readme if we need more FAQ.
 
 ### Setup Information
