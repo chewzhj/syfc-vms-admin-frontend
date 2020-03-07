@@ -1,3 +1,20 @@
+## MiniMetrics FrontEnd React App
+Will update this readme if we need more FAQ.
+
+### Setup Information
+
+Install node.js on your computer.
+Clone the repository into the folder of your choice.
+On your terminal (node.js cmd, git bash, powershell), run `npm install` to install the node.js packages required by this project.
+To run the React App, run `npm start` on the terminal.
+
+### Typical Usage
+
+If there are (or arent) any changes to the packages used (when cloning from github), run `npm install` again to update the packages.
+
+Then run the React App with `npm start`
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
