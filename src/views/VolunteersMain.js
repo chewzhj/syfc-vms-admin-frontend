@@ -84,7 +84,6 @@ export default class VolunteersMain extends React.Component {
       volunteersLoading,
       volunteersList
     } = this.props.volunteersMain
-    // const tableData = this.generateTableData()
     return (
       <SideBar activeTab='volunteers' title="Volunteers" subtitle="Manage SYFC Volunteer Information">
         <Row justify='end' style={{marginBottom: 24}}>

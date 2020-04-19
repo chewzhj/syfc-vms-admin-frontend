@@ -4,7 +4,7 @@ import EventsMainContainer from '../containers/EventsMainContainer'
 import EventsCreateContainer from '../containers/EventsCreateContainer'
 import EventsEditContainer from '../containers/EventsEditContainer'
 import VolunteersMainContainer from '../containers/VolunteersMainContainer'
-import VolunteersCreate from '../views/VolunteersCreate'
+import VolunteersCreateContainer from '../containers/VolunteersCreateContainer'
 import Login from '../views/Login'
 import DefaultReactApp from '../assets/js/App'
 import CounterContainer from '../containers/CounterContainer'
@@ -19,7 +19,7 @@ const Routing = () => {
       <Route path="/events/edit" component={EventsEditContainer}/>
       <Route path="/events" component={EventsMainContainer}/>
 
-      <Route path="/volunteers/create" component={VolunteersCreate}/>
+      <Route path="/volunteers/create" component={VolunteersCreateContainer}/>
       <Route path="/volunteers" component={VolunteersMainContainer}/>
 
       {/* fall through */}

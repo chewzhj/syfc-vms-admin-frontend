@@ -11,3 +11,17 @@ export async function getAllVolunteersAPI() {
     return [];
   }
 }
+
+// Volunteers Create
+export async function postCreateNewVolunteerAPI(volunteerObject) {
+  try {
+    let data = await API.post('volunteerAPI/createVolunteer',
+      volunteerObject
+    )
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+    return [];
+  }
+}
