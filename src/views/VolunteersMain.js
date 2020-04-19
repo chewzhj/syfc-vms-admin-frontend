@@ -10,24 +10,56 @@ import {
   UserAddOutlined,
   EditOutlined,
 } from '@ant-design/icons'
+import moment from 'moment'
 import {Link} from 'react-router-dom'
+import {getAllVolunteersAPI} from '../api/VolunteersAPI'
+
+const formatDate = (rawString) => {
+  if (rawString === null || rawString === "") {
+    return ""
+  }
+  const momentObj = moment(rawString)
+  return momentObj.format("YYYY-MM-DD")
+}
 
 const columns = [
   {
     title: 'Name',
-    dataIndex: 'name',
+    dataIndex: 'full_name',
+    fixed: 'left',
   },
   {
-    title: 'Description',
-    dataIndex: 'description',
+    title: 'Email',
+    dataIndex: 'email',
   },
   {
-    title: 'Start Date',
-    dataIndex: 'startDate',
+    title: 'Date of Birth',
+    dataIndex: 'dob',
+    render: (text, record, index) => formatDate(text),
   },
   {
-    title: 'End Date',
-    dataIndex: 'endDate',
+    title: 'Address',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Postal Code',
+    dataIndex: 'postal_code',
+  },
+  {
+    title: 'Church',
+    dataIndex: 'church',
+  },
+  {
+    title: 'Department',
+    dataIndex: 'department',
+  },
+  {
+    title: 'Gender',
+    dataIndex: 'gender',
+  },
+  {
+    title: 'Phone No.',
+    dataIndex: 'number',
   },
   {
     title: 'Edit',
@@ -35,30 +67,24 @@ const columns = [
       return (
         <Button shape='circle' icon={<EditOutlined/>}/>
       )
-    }
+    },
+    fixed: 'right',
   }
 ];
 
 export default class VolunteersMain extends React.Component {
 
-  generateTableData = () => {
-    const tableData = []
-
-    for (let i = 0; i < 20; i++) {
-      tableData.push({
-        key: i,
-        name: 'Event '+(i+1),
-        description: 'Description for Event '+(i+1),
-        startDate: (i+10)+'/05/2020',
-        endDate: (i+10)+'/06/2020',
-      })
-    }
-
-    return tableData
+  componentDidMount() {
+    this.props.retrieveVolunteers()
   }
 
+
   render() {
-    const tableData = this.generateTableData()
+    const {
+      volunteersLoading,
+      volunteersList
+    } = this.props.volunteersMain
+    // const tableData = this.generateTableData()
     return (
       <SideBar activeTab='volunteers' title="Volunteers" subtitle="Manage SYFC Volunteer Information">
         <Row justify='end' style={{marginBottom: 24}}>
@@ -69,8 +95,10 @@ export default class VolunteersMain extends React.Component {
           </Link>
       </Row>
         <Table
-          dataSource={tableData}
+          dataSource={volunteersList}
+          loading={volunteersLoading}
           columns={columns}
+          rowKey='id'
           bordered
         />
       </SideBar>

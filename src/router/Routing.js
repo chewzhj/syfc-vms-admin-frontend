@@ -3,7 +3,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import EventsMainContainer from '../containers/EventsMainContainer'
 import EventsCreateContainer from '../containers/EventsCreateContainer'
 import EventsEditContainer from '../containers/EventsEditContainer'
-import VolunteersMain from '../views/VolunteersMain'
+import VolunteersMainContainer from '../containers/VolunteersMainContainer'
 import VolunteersCreate from '../views/VolunteersCreate'
 import Login from '../views/Login'
 import DefaultReactApp from '../assets/js/App'
@@ -20,7 +20,7 @@ const Routing = () => {
       <Route path="/events" component={EventsMainContainer}/>
 
       <Route path="/volunteers/create" component={VolunteersCreate}/>
-      <Route path="/volunteers" component={VolunteersMain}/>
+      <Route path="/volunteers" component={VolunteersMainContainer}/>
 
       {/* fall through */}
       <Route path="/" component={Fallthrough}/>
