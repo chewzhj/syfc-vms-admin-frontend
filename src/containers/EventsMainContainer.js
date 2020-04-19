@@ -3,6 +3,9 @@ import View from '../views/EventsMain'
 import {
   retrieveEvents,
 } from '../actions/eventsMainActions'
+import {
+  loadEvent
+} from '../actions/eventsEditActions'
 
 const mapStateToProps = state => ({
   eventsMain: state.eventsMain
@@ -10,6 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveEvents: () => dispatch(retrieveEvents()),
+  loadEvent: value => dispatch(loadEvent(value)),
 })
 
 export default connect(

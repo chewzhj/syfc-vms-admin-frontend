@@ -13,7 +13,7 @@ const initialState = {
   eventTitle: '',
   eventDates: null,
   eventDesc: '',
-  submitting: '',
+  submitting: false,
   growlMessage: '',
 }
 

@@ -5,11 +5,14 @@ import {
   Col,
   Table,
   Button,
+  Divider,
+  Tooltip,
 } from 'antd'
 import moment from 'moment'
 import {
   PlusCircleOutlined,
   EditOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
 import {Link} from 'react-router-dom'
 import {getAllEventsAPI} from '../api/EventsAPI'
@@ -22,41 +25,6 @@ const formatDate = (rawString) => {
   return momentObj.format("YYYY-MM-DD")
 }
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    ellipsis: true,
-    width: '40%',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    ellipsis: true,
-    width: '60%',
-  },
-  {
-    title: 'Start Date',
-    dataIndex: 'start_date',
-    render: (text, record, index) => formatDate(text),
-    width: 120,
-  },
-  {
-    title: 'End Date',
-    dataIndex: 'end_date',
-    render: (text, record, index) => formatDate(text),
-    width: 120,
-  },
-  {
-    title: 'Edit',
-    render: (text, record, index) => {
-      return (
-        <Button shape='circle' icon={<EditOutlined/>}/>
-      )
-    },
-    width: 62,
-  }
-];
 
 export default class EventsMain extends React.Component {
 
@@ -64,20 +32,72 @@ export default class EventsMain extends React.Component {
     this.props.retrieveEvents()
   }
 
-  generateTableData = () => {
-    const tableData = []
-
-    for (let i = 0; i < 20; i++) {
-      tableData.push({
-        key: i,
-        name: 'Event '+(i+1),
-        description: 'Description for Event '+(i+1),
-        start_date: (i+10)+'/05/2020',
-        end_date: (i+10)+'/06/2020',
-      })
+  columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      ellipsis: true,
+      width: 100,
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+      ellipsis: true,
+      width: 140,
+    },
+    {
+      title: 'Start Date',
+      dataIndex: 'start_date',
+      render: (text, record, index) => formatDate(text),
+      width: 120,
+    },
+    {
+      title: 'End Date',
+      dataIndex: 'end_date',
+      render: (text, record, index) => formatDate(text),
+      width: 120,
+    },
+    {
+      title: 'Actions',
+      render: (text, record, index) => {
+        return (
+          <div>
+            <Tooltip title='Edit Event'>
+              <Button onClick={e => this.clickEdit(e, record.id)} href='/events/edit' shape='circle' icon={<EditOutlined/>}/>
+            </Tooltip>
+            <Divider type='vertical'/>
+            <Tooltip title='View Volunteers'>
+              <Button shape='circle' icon={<UserOutlined/>}/>
+            </Tooltip>
+          </div>
+        )
+      },
+      width: 120,
+      align: 'center',
     }
+  ];
+  clickEdit = (e, eventId) => {
+    e.preventDefault()
+    const { eventsList } = this.props.eventsMain
 
-    return tableData
+    const filtered = eventsList.filter(event => event.id === eventId)
+    if (filtered.length === 1) {
+      const editEvent = filtered[0]
+
+      const startDateMoment = moment(editEvent.start_date)
+      const endDateMoment = moment(editEvent.end_date)
+
+      const editObj = {
+        id: editEvent.id,
+        eventTitle: editEvent.name,
+        eventDates: [startDateMoment, endDateMoment],
+        eventDesc: editEvent.description,
+      }
+
+      this.props.loadEvent(editObj)
+
+      this.props.history.push('/events/edit')
+    }
   }
 
   render() {
@@ -99,7 +119,7 @@ export default class EventsMain extends React.Component {
         <Table
           dataSource={eventsList}
           loading={eventsLoading}
-          columns={columns}
+          columns={this.columns}
           rowKey='id'
           bordered
         />
