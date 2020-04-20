@@ -44,7 +44,7 @@ export default class MyEvents extends React.Component {
     } = this.props.myEvents
 
     return (
-      <SideBar activeTab='events' title="My Events">
+      <SideBar activeTab='events' title="My Events" padding={8}>
         <Row gutter={[12, 12]}>
           {myEventsList.map(evt => (
             <Col key={evt.id} lg={6} sm={8} xs={12}>

@@ -26,7 +26,8 @@ export default class SideBar extends React.Component {
   render() {
     const name = sessionStorage.getItem('name') || "User"
     const loginType = sessionStorage.getItem('loginType')
-    const { activeTab, title, subtitle } = this.props
+    const { activeTab, title, subtitle, padding } = this.props
+    const innerPadding = padding || 24
     const phtitle = title || "Title"
     const phsubtitle = subtitle || ""
     const vpWidth = window.innerWidth
@@ -75,7 +76,7 @@ export default class SideBar extends React.Component {
             style= {{ background: '#fff', paddingLeft: 50, zIndex: 0 }}
           />
           <Content style={{ margin: '16px 0' }}>
-            <div style={loginType==='volunteer'?{ padding: 8, minHeight: 360, background: '#fff' }:{ padding: 24, minHeight: 360, background: '#fff' }}>
+            <div style={{ padding: innerPadding, minHeight: 360, background: '#fff' }}>
               {this.props.children}
             </div>
           </Content>
