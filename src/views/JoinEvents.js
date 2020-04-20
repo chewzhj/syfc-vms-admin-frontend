@@ -3,29 +3,19 @@ import SideBar from '../components/SideBar'
 import {
   Row,
   Col,
-  Table,
   Button,
   Spin,
   Skeleton,
-  Divider,
-  Tooltip,
   Modal,
   Typography,
   notification,
 } from 'antd'
 import moment from 'moment'
-import {
-  PlusCircleOutlined,
-  EditOutlined,
-  UserOutlined,
-  FileExcelOutlined,
-} from '@ant-design/icons'
 import {Link} from 'react-router-dom'
 import EventCard from '../components/EventCard'
 import EventsPhrases from '../phrases/EventsPhrases'
-import {getEventsOfVolunteerAPI} from '../api/EventsAPI'
 
-const { Title, Text, Paragraph } = Typography
+const { Text, Paragraph } = Typography
 
 const formatDate = (rawString) => {
   if (rawString === null || rawString === "") {

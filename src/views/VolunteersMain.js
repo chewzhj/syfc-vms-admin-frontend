@@ -2,7 +2,6 @@ import React from 'react'
 import SideBar from '../components/SideBar'
 import {
   Row,
-  Col,
   Table,
   Button,
 } from 'antd'
@@ -12,7 +11,6 @@ import {
 } from '@ant-design/icons'
 import moment from 'moment'
 import {Link} from 'react-router-dom'
-import {getAllVolunteersAPI} from '../api/VolunteersAPI'
 
 const formatDate = (rawString) => {
   if (rawString === null || rawString === "") {
@@ -92,7 +90,7 @@ export default class VolunteersMain extends React.Component {
               Create New Volunteer
             </Button>
           </Link>
-      </Row>
+        </Row>
         <Table
           dataSource={volunteersList}
           loading={volunteersLoading}

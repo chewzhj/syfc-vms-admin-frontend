@@ -3,7 +3,6 @@ import SideBar from '../components/SideBar'
 import {
   Row,
   Col,
-  Table,
   Button,
   Card,
   Input,
@@ -11,10 +10,6 @@ import {
   Popconfirm,
   notification,
 } from 'antd'
-import {
-  PlusCircleOutlined,
-  EditOutlined,
-} from '@ant-design/icons'
 import { yellow } from '@ant-design/colors'
 import { Redirect } from 'react-router-dom'
 import EventsPhrases from '../phrases/EventsPhrases'
@@ -210,7 +205,7 @@ export default class EventsEdit extends React.Component {
           <Row gutter={[30, 30]}>
             <Col md={16} xs={24}>
               <RangePicker
-                style={datesChanged?{backgroundColor: yellow[1]}:null}
+                // style={datesChanged?{backgroundColor: yellow[1]}:null}
                 format="YYYY-MM-DD"
                 style={datesChanged?{backgroundColor: yellow[1], width: '100%'} : {width:'100%'}}
                 onChange={this.changeDates}

@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, Typography} from 'antd'
 import event_picture from '../assets/img/event_picture.jpg'
 
-const {Text, Paragraph} = Typography
+const {Text} = Typography
 
 const EventCard = (props) => {
   return (

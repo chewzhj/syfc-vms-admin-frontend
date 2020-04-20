@@ -13,10 +13,8 @@ import {
   UserOutlined,
   LockOutlined,
 } from '@ant-design/icons'
-import {Link} from 'react-router-dom'
 import LoginElements from '../components/LoginElements'
 import LoginPhrases from '../phrases/LoginPhrases'
-import Full_Logo from '../assets/img/syfc-full-logo.png'
 
 const {Title} = Typography
 

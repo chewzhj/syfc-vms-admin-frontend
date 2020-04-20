@@ -3,29 +3,22 @@ import SideBar from '../components/SideBar'
 import {
   Row,
   Col,
-  Table,
   Button,
-  Divider,
   Tooltip,
-  Modal,
   Spin,
   Typography,
 } from 'antd'
 import moment from 'moment'
 import {
-  PlusCircleOutlined,
   EditOutlined,
-  UserOutlined,
-  FileExcelOutlined,
 } from '@ant-design/icons'
-import {Link} from 'react-router-dom'
 import badge3 from '../assets/img/badge_3.png'
 import badge5 from '../assets/img/badge_5.png'
 import badge10 from '../assets/img/badge_10.png'
 import badge20 from '../assets/img/badge_20.png'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
 
-const { Title, Text, Paragraph } = Typography
+const { Title, Text } = Typography
 
 const formatDate = (rawString) => {
   if (!rawString) {
@@ -53,18 +46,6 @@ const labels = [
   VolunteersPhrases.CREATE_FORM_TITLE_DEPT,
   VolunteersPhrases.CREATE_FORM_TITLE_GENDER,
   VolunteersPhrases.CREATE_FORM_TITLE_NUMBER,
-]
-const values = [
-  "Joshua Chew",
-  "joshua@email.com",
-  "1995-06-24",
-  "S2134567G",
-  "Block 567 Donowear",
-  "234567",
-  "Donowat",
-  "University",
-  "M",
-  "83456743",
 ]
 
 export default class Profile extends React.Component {
@@ -118,6 +99,9 @@ export default class Profile extends React.Component {
         </div>
         <Title level={4}>
           My Details
+          <Tooltip title='Edit Details'>
+            <Button shape='circle' icon={<EditOutlined/>} style={{marginLeft: 12}}/>
+          </Tooltip>
         </Title>
 
         <Spin spinning={profileLoading}>

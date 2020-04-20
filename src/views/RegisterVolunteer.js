@@ -3,10 +3,8 @@ import {
   Row,
   Col,
   Button,
-  Card,
   Input,
   DatePicker,
-  Popconfirm,
   Select,
   Typography,
   Radio,
@@ -14,14 +12,9 @@ import {
 } from 'antd'
 import {
   CaretLeftOutlined,
-  UserOutlined,
-  LockOutlined,
 } from '@ant-design/icons'
-import {Link} from 'react-router-dom'
 import LoginElements from '../components/LoginElements'
-import LoginPhrases from '../phrases/LoginPhrases'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
-import Full_Logo from '../assets/img/syfc-full-logo.png'
 
 const {Option} = Select
 const {Title} = Typography

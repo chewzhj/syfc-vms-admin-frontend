@@ -1,4 +1,6 @@
 import React from 'react'
+import '../assets/css/App.css';
+import 'antd/dist/antd.css'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import JoinEventsContainer from '../containers/JoinEventsContainer'
 import MyEventsContainer from '../containers/MyEventsContainer'
@@ -12,8 +14,6 @@ import Login from '../views/Login'
 import LoginStaffContainer from '../containers/LoginStaffContainer'
 import LoginVolunteerContainer from '../containers/LoginVolunteerContainer'
 import RegisterVolunteerContainer from '../containers/RegisterVolunteerContainer'
-import DefaultReactApp from '../assets/js/App'
-import CounterContainer from '../containers/CounterContainer'
 
 const Routing = () => {
   const loginType = sessionStorage.getItem('loginType')
@@ -32,22 +32,24 @@ const Routing = () => {
   } else if (loginType === 'staff') {
     return (
       <Switch>
-        <Route path="/events/create" component={EventsCreateContainer}/>
-        <Route path="/events/edit" component={EventsEditContainer}/>
+        <Route exact path="/events/create" component={EventsCreateContainer}/>
+        <Route exact path="/events/edit" component={EventsEditContainer}/>
         <Route exact path="/events" component={EventsMainContainer}/>
 
-        <Route path="/volunteers/create" component={VolunteersCreateContainer}/>
-        <Route path="/volunteers" component={VolunteersMainContainer}/>
+        <Route exact path="/volunteers/create" component={VolunteersCreateContainer}/>
+        <Route exact path="/volunteers" component={VolunteersMainContainer}/>
+        <Route path="/volunteers" component={VolunteersFallthough}/>
+
 
         {/* fall through */}
         <Route path="/" component={Fallthrough}/>
       </Switch>
     )
-  } else {
+  } else { // not logged in
     return (
       <Switch>
-        <Route path="/login/staff" component={LoginStaffContainer} />
-        <Route path="/login/volunteer" component={LoginVolunteerContainer} />
+        <Route exact path="/login/staff" component={LoginStaffContainer} />
+        <Route exact path="/login/volunteer" component={LoginVolunteerContainer} />
         <Route exact path="/login" component={Login} />
 
         <Route exact path="/register" component={RegisterVolunteerContainer} />
@@ -59,6 +61,7 @@ const Routing = () => {
 }
 
 const LoginFallthrough = () => <Redirect to='/login'/>
+const VolunteersFallthough = () => <Redirect to="/volunteers"/>
 const Fallthrough = () => <Redirect to="/events"/>
 
 export default Routing

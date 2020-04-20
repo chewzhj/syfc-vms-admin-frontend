@@ -21,7 +21,7 @@ import {Link} from 'react-router-dom'
 import ReactExport from 'react-data-export'
 import EventsPhrases from '../phrases/EventsPhrases'
 
-const { Title, Text, Paragraph } = Typography
+const { Text, Paragraph } = Typography
 const ExcelFile = ReactExport.ExcelFile
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn
@@ -187,6 +187,7 @@ export default class EventsMain extends React.Component {
                 <ExcelExport eventVolList={eventVolList} name={selectedEventDetails.name}/>
                 <Table
                   bordered
+                  loading={eventVolLoading}
                   size='small'
                   rowKey='id'
                   dataSource={eventVolList}

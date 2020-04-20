@@ -3,7 +3,6 @@ import SideBar from '../components/SideBar'
 import {
   Row,
   Col,
-  Table,
   Button,
   Card,
   Input,
@@ -11,10 +10,6 @@ import {
   Popconfirm,
   notification,
 } from 'antd'
-import {
-  PlusCircleOutlined,
-  EditOutlined,
-} from '@ant-design/icons'
 import EventsPhrases from '../phrases/EventsPhrases'
 
 const { RangePicker } = DatePicker

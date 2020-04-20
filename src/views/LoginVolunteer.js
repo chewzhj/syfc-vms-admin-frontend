@@ -13,10 +13,8 @@ import {
   UserOutlined,
   LockOutlined,
 } from '@ant-design/icons'
-import {Link} from 'react-router-dom'
 import LoginElements from '../components/LoginElements'
 import LoginPhrases from '../phrases/LoginPhrases'
-import Full_Logo from '../assets/img/syfc-full-logo.png'
 
 const {Title} = Typography
 
@@ -139,6 +137,7 @@ export default class LoginVolunteer extends React.Component {
             <Button
               type='primary'
               htmlType='submit'
+              loading={submitting}
               onClick={this.volunteerLogin}
               style={{width: '100%', margin: '8px 0'}}>
               {LoginPhrases.BUTTON_LOGIN}
