@@ -75,7 +75,7 @@ export default class SideBar extends React.Component {
             style= {{ background: '#fff', paddingLeft: 50, zIndex: 0 }}
           />
           <Content style={{ margin: '16px 0' }}>
-            <div style={{ padding: 24, minHeight: 360, background: '#fff' }}>
+            <div style={loginType==='volunteer'?{ padding: 8, minHeight: 360, background: '#fff' }:{ padding: 24, minHeight: 360, background: '#fff' }}>
               {this.props.children}
             </div>
           </Content>

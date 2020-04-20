@@ -45,7 +45,7 @@ export default class MyEvents extends React.Component {
 
     return (
       <SideBar activeTab='events' title="My Events">
-        <Row>
+        <Row gutter={[12, 12]}>
           {myEventsList.map(evt => (
             <Col key={evt.id} lg={6} sm={8} xs={12}>
               <EventCard
@@ -55,7 +55,6 @@ export default class MyEvents extends React.Component {
               />
             </Col>
           ))}
-
         </Row>
       </SideBar>
     )
