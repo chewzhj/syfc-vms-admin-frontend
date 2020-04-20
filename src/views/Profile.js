@@ -8,6 +8,7 @@ import {
   Divider,
   Tooltip,
   Modal,
+  Spin,
   Typography,
 } from 'antd'
 import moment from 'moment'
@@ -27,7 +28,7 @@ import VolunteersPhrases from '../phrases/VolunteersPhrases'
 const { Title, Text, Paragraph } = Typography
 
 const formatDate = (rawString) => {
-  if (rawString === null || rawString === "") {
+  if (!rawString) {
     return ""
   }
   const momentObj = moment(rawString)
@@ -68,7 +69,36 @@ const values = [
 
 export default class Profile extends React.Component {
 
+  componentDidMount() {
+    this.props.getProfile()
+  }
+
+  processValues = (profileObject) => {
+    if (profileObject) {
+      const values = [
+        profileObject.full_name,
+        profileObject.email,
+        formatDate(profileObject.dob),
+        profileObject.nric,
+        profileObject.address,
+        profileObject.postal_code,
+        profileObject.church,
+        profileObject.department,
+        profileObject.gender,
+        profileObject.number,
+      ]
+      return values
+    } else {
+      return (new Array(10)).fill("")
+    }
+  }
+
   render() {
+    const {
+      profileLoading,
+      profileObject
+    } = this.props.profile
+    const profileValues = this.processValues(profileObject)
 
     return (
       <SideBar activeTab='profile' title="My Profile">
@@ -90,15 +120,17 @@ export default class Profile extends React.Component {
           My Details
         </Title>
 
-        <Row gutter={[12,12]}>
-          {labels.map((text, i) => (
-            <DetailLabel
-              key={text}
-              label={text}
-              value={values[i]}
-            />
-          ))}
-        </Row>
+        <Spin spinning={profileLoading}>
+          <Row gutter={[12,12]}>
+            {labels.map((text, i) => (
+              <DetailLabel
+                key={text}
+                label={text}
+                value={profileValues[i]}
+              />
+            ))}
+          </Row>
+        </Spin>
       </SideBar>
     )
   }
