@@ -32,6 +32,13 @@ const departments = [
 
 export default class VolunteersCreate extends React.Component {
 
+  componentDidUpdate() {
+    const {growlMessage} = this.props.volunteersCreate
+    if (growlMessage) {
+      this.onNotification(growlMessage)
+    }
+  }
+
   changeName = (e) => this.props.changeName(e.target.value)
   changeEmail = (e) => this.props.changeEmail(e.target.value)
   changePassword = (e) => this.props.changePassword(e.target.value)
@@ -220,11 +227,7 @@ export default class VolunteersCreate extends React.Component {
       gender,
       number,
       submitting,
-      growlMessage,
     } = this.props.volunteersCreate
-    if (growlMessage) {
-      this.onNotification(growlMessage)
-    }
 
     return (
       <SideBar activeTab='volunteers' title="Create New Volunteer">

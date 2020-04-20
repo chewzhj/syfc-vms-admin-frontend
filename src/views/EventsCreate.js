@@ -21,6 +21,13 @@ const { RangePicker } = DatePicker
 
 export default class EventsCreate extends React.Component {
 
+  componentDidUpdate() {
+    const {growlMessage} = this.props.eventsCreate
+    if (growlMessage) {
+      this.onNotification(growlMessage)
+    }
+  }
+
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
   changeDesc = (e) => this.props.changeDesc(e.target.value)
@@ -136,14 +143,8 @@ export default class EventsCreate extends React.Component {
       eventDates,
       eventDesc,
       submitting,
-      growlMessage
     } = this.props.eventsCreate
-    if (growlMessage) {
-      this.onNotification(growlMessage)
-    }
 
-    // const useRangePicker = window.innerWidth > 570
-    // const tableData = this.generateTableData()
     return (
       <SideBar activeTab='events' title="Create New Event">
         <Card>

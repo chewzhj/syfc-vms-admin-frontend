@@ -6,7 +6,11 @@ const {Text, Paragraph} = Typography
 
 const EventCard = (props) => {
   return (
-    <Card size='small' cover={<EventImage/>} style={{minWidth: 140, boxShadow: '2px 2px #eee'}}>
+    <Card
+      size='small'
+      onClick={props.onClick}
+      cover={<EventImage/>}
+      style={{minWidth: 140, boxShadow: '2px 2px #eee'}}>
       <Text strong ellipsis style={{width: '100%'}}>{props.name}</Text><br/>
       <Text style={{fontSize: 11}}>{props.startDate} &rarr; {props.endDate}</Text>
     </Card>

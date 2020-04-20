@@ -21,7 +21,16 @@ import EventsPhrases from '../phrases/EventsPhrases'
 
 const { RangePicker } = DatePicker
 
-export default class EventsCreate extends React.Component {
+export default class EventsEdit extends React.Component {
+
+  componentDidUpdate() {
+    const {growlMessage, growlDeleting} = this.props.eventsEdit
+    if (growlMessage) {
+      this.onNotification(growlMessage, false)
+    } else if (growlDeleting) {
+      this.onNotification(growlDeleting, true)
+    }
+  }
 
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
@@ -144,15 +153,8 @@ export default class EventsCreate extends React.Component {
       eventDates,
       eventDesc,
       submitting,
-      growlMessage,
       deleting,
-      growlDeleting,
     } = this.props.eventsEdit
-    if (growlMessage) {
-      this.onNotification(growlMessage, false)
-    } else if (growlDeleting) {
-      this.onNotification(growlDeleting, true)
-    }
 
     if (!originalEventDetails.id) {
       return <Redirect to='/events' />

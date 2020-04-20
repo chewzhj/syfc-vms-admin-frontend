@@ -75,3 +75,16 @@ export async function getEventsOfVolunteerAPI() {
     return [];
   }
 }
+
+export async function postJoinEventAPI(eventId) {
+  const volId = sessionStorage.getItem('id')
+  console.log(eventId, volId);
+  try {
+    let data = await API.post(`/eventAPI/volunteerJoinEvent/${eventId}&${volId}`)
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+    return [];
+  }
+}
