@@ -6,6 +6,9 @@ import EventsEditContainer from '../containers/EventsEditContainer'
 import VolunteersMainContainer from '../containers/VolunteersMainContainer'
 import VolunteersCreateContainer from '../containers/VolunteersCreateContainer'
 import Login from '../views/Login'
+import LoginStaff from '../views/LoginStaff'
+import LoginVolunteer from '../views/LoginVolunteer'
+import RegisterVolunteer from '../views/RegisterVolunteer'
 import DefaultReactApp from '../assets/js/App'
 import CounterContainer from '../containers/CounterContainer'
 
@@ -13,7 +16,11 @@ const Routing = () => {
   return (
     <Switch>
 
+      <Route path="/login/staff" component={LoginStaff} />
+      <Route path="/login/volunteer" component={LoginVolunteer} />
       <Route path="/login" component={Login} />
+      
+      <Route path="/register" component={RegisterVolunteer} />
 
       <Route path="/events/create" component={EventsCreateContainer}/>
       <Route path="/events/edit" component={EventsEditContainer}/>
