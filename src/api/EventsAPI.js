@@ -62,3 +62,16 @@ export async function deleteEventAPI(eventId) {
     return [];
   }
 }
+
+// Get Events of Volunteer
+export async function getEventsOfVolunteerAPI() {
+  const volId = sessionStorage.getItem('id')
+  try {
+    let data = await API.get('/eventAPI/retrieveVolunteerEvents/' + volId)
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+    return [];
+  }
+}

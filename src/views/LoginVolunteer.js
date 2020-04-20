@@ -6,6 +6,7 @@ import {
   Input,
   Button,
   Typography,
+  notification,
 } from 'antd'
 import {
   CaretLeftOutlined,
@@ -21,7 +22,67 @@ const {Title} = Typography
 
 export default class LoginVolunteer extends React.Component {
 
+  componentDidUpdate() {
+    const {growlMessage} = this.props.loginVolunteer
+    if (growlMessage) {
+      this.onNotification(growlMessage)
+    }
+  }
+
+  changeEmail = (e) => this.props.changeEmail(e.target.value)
+  changePassword = (e) => this.props.changePassword(e.target.value)
+  back = (e) => {
+    e.preventDefault()
+    this.props.reset()
+    this.props.history.push('/login')
+  }
+  volunteerLogin = () => {
+    const {
+      email,
+      password,
+    } = this.props.loginVolunteer
+
+    if (email.trim() !== "" && password !== "") {
+      const volunteerLoginObject = {
+        email: email.trim(),
+        password
+      }
+      this.props.volunteerLogin(volunteerLoginObject)
+    }
+  }
+
+  onNotification = (growlNotification) => {
+    const alerts = {
+      success: {
+        message: `Volunteer Login Successful`,
+        description: `Successfully logged in!`
+      },
+      error: {
+        message: `Error`,
+        description: "Email or password is invalid!"
+      }
+    }
+
+    const openNotificationWithIcon = type => {
+      notification[type](alerts[type]);
+    };
+
+    openNotificationWithIcon(growlNotification)
+
+    this.props.resetNotification()
+
+    if (growlNotification === 'success') {
+      window.location.href = '/events'
+    }
+  }
+
   render() {
+    const {
+      email,
+      password,
+      submitting,
+    } = this.props.loginVolunteer
+
     return (
       <LoginElements>
         <Row style={{marginBottom: 20}}>
@@ -54,9 +115,8 @@ export default class LoginVolunteer extends React.Component {
             <Input
               placeholder={LoginPhrases.INPUT_EMAIL_PLACEHOLDER}
               prefix={<UserOutlined />}
-              // style={{margin: '8px 0'}}
-              // onChange={this.onChangeEmail}
-              // value={email}
+              onChange={this.changeEmail}
+              value={email}
             />
           </Form.Item>
           <Form.Item
@@ -71,16 +131,15 @@ export default class LoginVolunteer extends React.Component {
             <Input.Password
               placeholder={LoginPhrases.INPUT_PASSWORD_PLACEHOLDER}
               prefix={<LockOutlined />}
-              // style={{margin: '8px 0'}}
-              // onChange={this.onChangePassword}
-              // value={password}
+              onChange={this.changePassword}
+              value={password}
             />
           </Form.Item>
           <Form.Item>
             <Button
               type='primary'
               htmlType='submit'
-              onClick={this.onClickLogin}
+              onClick={this.volunteerLogin}
               style={{width: '100%', margin: '8px 0'}}>
               {LoginPhrases.BUTTON_LOGIN}
             </Button>
