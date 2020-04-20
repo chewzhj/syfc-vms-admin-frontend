@@ -184,7 +184,7 @@ export default class EventsMain extends React.Component {
               </Col>
 
               <Col span={24}>
-                <ExcelExport eventVolList={eventVolList}/>
+                <ExcelExport eventVolList={eventVolList} name={selectedEventDetails.name}/>
                 <Table
                   bordered
                   size='small'
@@ -222,18 +222,21 @@ const ExcelExport = (props) => {
     nric: vol.nric,
     dob: formatDate(vol.dob)
   }))
+  const filename = props.name.replace(/\s/g, "_") + '_volunteers'
 
   return (
-    <ExcelFile element={
-      <Button
-        style={{margin: '10px 0px'}}
-        type='primary'
-        icon={
-          <FileExcelOutlined/>
-        }>
-        Export Volunteer Info
-      </Button>
-    }>
+    <ExcelFile
+      filename={filename}
+      element={
+        <Button
+          style={{margin: '10px 0px'}}
+          type='primary'
+          icon={
+            <FileExcelOutlined/>
+          }>
+          Export Volunteer Info
+        </Button>
+      }>
       <ExcelSheet data={exportDataset} name="Volunteers">
         <ExcelColumn label="Name" value="name"/>
         <ExcelColumn label="NRIC" value="nric"/>

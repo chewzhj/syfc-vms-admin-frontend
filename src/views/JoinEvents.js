@@ -77,6 +77,7 @@ export default class JoinEvents extends React.Component {
     this.props.resetNotification()
 
     if (growlNotification === 'success') {
+      this.closeView()
       this.props.history.push('/events')
     }
   }

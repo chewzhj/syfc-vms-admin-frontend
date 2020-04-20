@@ -11,7 +11,7 @@ import VolunteersCreateContainer from '../containers/VolunteersCreateContainer'
 import Login from '../views/Login'
 import LoginStaffContainer from '../containers/LoginStaffContainer'
 import LoginVolunteerContainer from '../containers/LoginVolunteerContainer'
-import RegisterVolunteer from '../views/RegisterVolunteer'
+import RegisterVolunteerContainer from '../containers/RegisterVolunteerContainer'
 import DefaultReactApp from '../assets/js/App'
 import CounterContainer from '../containers/CounterContainer'
 
@@ -50,7 +50,7 @@ const Routing = () => {
         <Route path="/login/volunteer" component={LoginVolunteerContainer} />
         <Route exact path="/login" component={Login} />
 
-        <Route exact path="/register" component={RegisterVolunteer} />
+        <Route exact path="/register" component={RegisterVolunteerContainer} />
 
         <Route path="/" component={LoginFallthrough} />
       </Switch>

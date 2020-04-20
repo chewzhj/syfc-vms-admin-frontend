@@ -87,17 +87,17 @@ export default class LoginVolunteer extends React.Component {
       <LoginElements>
         <Row style={{marginBottom: 20}}>
           <Col span={6}>
-            <Link to='/login'>
               <Button
+                href='/login'
+                onClick={this.back}
                 style={{float: 'left'}}
                 icon={
                   <CaretLeftOutlined/>
                 }>
                 Back
               </Button>
-            </Link>
           </Col>
-          <Col span={12}>
+          <Col span={15}>
             <Title level={4}>Volunteer Login</Title>
           </Col>
         </Row>

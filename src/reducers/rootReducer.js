@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 import {loginStaffReducer} from './loginStaffReducer'
 import {loginVolunteerReducer} from './loginVolunteerReducer'
+import {registerVolunteerReducer} from './registerVolunteerReducer'
 import {eventsCreateReducer} from './eventsCreateReducer'
 import {eventsEditReducer} from './eventsEditReducer'
 import {eventsMainReducer} from './eventsMainReducer'
@@ -14,6 +15,7 @@ import {counterReducer} from './counterReducer'
 export default combineReducers({
   loginStaff: loginStaffReducer,
   loginVolunteer: loginVolunteerReducer,
+  registerVolunteer: registerVolunteerReducer,
   eventsCreate: eventsCreateReducer,
   eventsEdit: eventsEditReducer,
   eventsMain: eventsMainReducer,
