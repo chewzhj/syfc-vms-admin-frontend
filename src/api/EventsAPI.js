@@ -12,6 +12,17 @@ export async function getAllEventsAPI() {
   }
 }
 
+export async function getVolunteersInEventAPI(eventId) {
+  try {
+    let data = await API.get('eventAPI/retrieveVolunteersInEvent/' + eventId)
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+    return [];
+  }
+}
+
 // Event Create
 export async function postCreateNewEventAPI(eventObject) {
   try {
