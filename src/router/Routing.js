@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import EventJoin from '../views/EventJoin'
-import MyEvents from '../views/MyEvents'
+import MyEventsContainer from '../containers/MyEventsContainer'
 import Profile from '../views/Profile'
 import EventsMainContainer from '../containers/EventsMainContainer'
 import EventsCreateContainer from '../containers/EventsCreateContainer'
@@ -21,7 +21,7 @@ const Routing = () => {
   if (loginType === 'volunteer') {
     return (
       <Switch>
-        <Route exact path="/events" component={MyEvents}/>
+        <Route exact path="/events" component={MyEventsContainer}/>
         <Route exact path="/joinevents" component={EventJoin}/>
         <Route exact path="/profile" component={Profile}/>
 

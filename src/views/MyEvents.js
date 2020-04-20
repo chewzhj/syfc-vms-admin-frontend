@@ -18,6 +18,7 @@ import {
   FileExcelOutlined,
 } from '@ant-design/icons'
 import {Link} from 'react-router-dom'
+import EventCard from '../components/EventCard'
 import EventsPhrases from '../phrases/EventsPhrases'
 import {getEventsOfVolunteerAPI} from '../api/EventsAPI'
 
@@ -31,17 +32,31 @@ const formatDate = (rawString) => {
   return momentObj.format("YYYY-MM-DD")
 }
 
-
 export default class MyEvents extends React.Component {
 
   componentDidMount() {
-    getEventsOfVolunteerAPI()
+    this.props.getMyEvents()
   }
 
   render() {
+    const {
+      myEventsList
+    } = this.props.myEvents
+
     return (
       <SideBar activeTab='events' title="My Events">
-        Joining Events in 2020 KEKW
+        <Row>
+          {myEventsList.map(evt => (
+            <Col key={evt.id} lg={6} sm={8} xs={12}>
+              <EventCard
+                name={evt.name}
+                startDate={formatDate(evt.start_date)}
+                endDate={formatDate(evt.end_date)}
+              />
+            </Col>
+          ))}
+
+        </Row>
       </SideBar>
     )
   }

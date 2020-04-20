@@ -6,6 +6,7 @@ import {eventsEditReducer} from './eventsEditReducer'
 import {eventsMainReducer} from './eventsMainReducer'
 import {volunteersCreateReducer} from './volunteersCreateReducer'
 import {volunteersMainReducer} from './volunteersMainReducer'
+import {myEventsReducer} from './myEventsReducer'
 import {counterReducer} from './counterReducer'
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   eventsMain: eventsMainReducer,
   volunteersCreate: volunteersCreateReducer,
   volunteersMain: volunteersMainReducer,
+  myEvents: myEventsReducer,
   counter: counterReducer,
 })
