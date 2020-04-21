@@ -11,6 +11,7 @@ import {volunteersMainReducer} from './volunteersMainReducer'
 import {joinEventsReducer} from './joinEventsReducer'
 import {myEventsReducer} from './myEventsReducer'
 import {profileReducer} from './profileReducer'
+import {profileEditReducer} from './profileEditReducer'
 import {counterReducer} from './counterReducer'
 
 export default combineReducers({
@@ -26,5 +27,6 @@ export default combineReducers({
   joinEvents: joinEventsReducer,
   myEvents: myEventsReducer,
   profile: profileReducer,
+  profileEdit: profileEditReducer,
   counter: counterReducer,
 })

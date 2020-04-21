@@ -4,6 +4,7 @@ import 'antd/dist/antd.css'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import JoinEventsContainer from '../containers/JoinEventsContainer'
 import MyEventsContainer from '../containers/MyEventsContainer'
+import ProfileEditContainer from '../containers/ProfileEditContainer'
 import ProfileContainer from '../containers/ProfileContainer'
 import EventsMainContainer from '../containers/EventsMainContainer'
 import EventsCreateContainer from '../containers/EventsCreateContainer'
@@ -24,6 +25,7 @@ const Routing = () => {
       <Switch>
         <Route exact path="/events" component={MyEventsContainer}/>
         <Route exact path="/joinevents" component={JoinEventsContainer}/>
+        <Route exact path="/profile/edit" component={ProfileEditContainer}/>
         <Route exact path="/profile" component={ProfileContainer}/>
 
         {/* fall through */}

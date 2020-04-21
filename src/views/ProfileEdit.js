@@ -25,10 +25,10 @@ const departments = [
   "University",
 ]
 
-export default class VolunteersEdit extends React.Component {
+export default class ProfileEdit extends React.Component {
 
   componentDidUpdate() {
-    const {growlMessage} = this.props.volunteersEdit
+    const {growlMessage} = this.props.profileEdit
     if (growlMessage) {
       this.onNotification(growlMessage)
     }
@@ -48,7 +48,7 @@ export default class VolunteersEdit extends React.Component {
   resetNotification = () => this.props.resetNotification()
   discard = () => {
     this.props.discard()
-    this.props.history.push('/volunteers')
+    this.props.history.push('/profile')
   }
 
   checkFields = () => {
@@ -64,7 +64,7 @@ export default class VolunteersEdit extends React.Component {
       dept,
       gender,
       number,
-    } = this.props.volunteersEdit
+    } = this.props.profileEdit
 
     const checks = (new Array(11)).fill(false)
     if (name.trim() !== '') {
@@ -143,7 +143,7 @@ export default class VolunteersEdit extends React.Component {
       this.submitVolunteer()
     } else {
       notification.warning({
-        message: 'Volunteer Update Error',
+        message: 'Profile Error',
         description: messageNodeBuilder(outputs)
       })
     }
@@ -162,7 +162,7 @@ export default class VolunteersEdit extends React.Component {
       dept,
       gender,
       number,
-    } = this.props.volunteersEdit
+    } = this.props.profileEdit
 
     const dtf = 'YYYY-MM-DD'
 
@@ -187,7 +187,7 @@ export default class VolunteersEdit extends React.Component {
   onNotification = (growlNotification) => {
     const alerts = {
       success: {
-        message: `Updated Volunteer`,
+        message: `Updated Profile`,
         description: `Successfully updated!`
       },
       error: {
@@ -205,7 +205,7 @@ export default class VolunteersEdit extends React.Component {
     this.props.resetNotification()
 
     if (growlNotification === 'success') {
-      this.props.history.push('/volunteers')
+      this.props.history.push('/profile')
     }
   }
 
@@ -224,9 +224,9 @@ export default class VolunteersEdit extends React.Component {
       gender,
       number,
       submitting,
-    } = this.props.volunteersEdit
+    } = this.props.profileEdit
     if (!originalVolDetails.id) {
-      return <Redirect to='/volunteers' />
+      return <Redirect to='/profile' />
     }
     const nameChanged = name !== originalVolDetails.name
     const emailChanged = email !== originalVolDetails.email
@@ -241,7 +241,7 @@ export default class VolunteersEdit extends React.Component {
     const numberChanged = number !== originalVolDetails.number
 
     return (
-      <SideBar activeTab='volunteers' title="Update Volunteer">
+      <SideBar activeTab='profile' title="Update Profile">
         <Card>
           {/* Name Field */}
           <Row gutter={[5, 5]}>
@@ -432,7 +432,7 @@ export default class VolunteersEdit extends React.Component {
               loading={submitting}
               type='primary'
               style={{ float: 'right', marginTop: 10, marginLeft: 10 }}>
-              Update Volunteer
+              Update Profile
             </Button>
           </Col>
         </Row>

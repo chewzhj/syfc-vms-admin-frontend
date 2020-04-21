@@ -73,6 +73,31 @@ export default class Profile extends React.Component {
       return (new Array(10)).fill("")
     }
   }
+  clickEdit = (e) => {
+    e.preventDefault()
+    const editVol = this.props.profile.profileObject
+
+    const dobMoment = moment(editVol.dob)
+
+    const editObj = {
+      id: editVol.id,
+      name: editVol.full_name,
+      email: editVol.email,
+      password: editVol.password,
+      dob: dobMoment,
+      nric: editVol.nric,
+      address: editVol.address,
+      postal: editVol.postal_code,
+      church: editVol.church,
+      dept: editVol.department,
+      gender: editVol.gender,
+      number: editVol.number,
+    }
+
+    this.props.loadVolunteer(editObj)
+
+    this.props.history.push('/profile/edit')
+  }
 
   render() {
     const {
@@ -100,7 +125,7 @@ export default class Profile extends React.Component {
         <Title level={4}>
           My Details
           <Tooltip title='Edit Details'>
-            <Button shape='circle' icon={<EditOutlined/>} style={{marginLeft: 12}}/>
+            <Button onClick={this.clickEdit} href='/profile/edit' shape='circle' icon={<EditOutlined/>} style={{marginLeft: 12}}/>
           </Tooltip>
         </Title>
 

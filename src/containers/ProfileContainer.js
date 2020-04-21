@@ -3,6 +3,7 @@ import View from '../views/Profile'
 import {
   getProfile,
 } from '../actions/profileActions'
+import {loadVolunteer} from '../actions/profileEditActions'
 
 const mapStateToProps = state => ({
   profile: state.profile
@@ -10,6 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProfile: () => dispatch(getProfile()),
+  loadVolunteer: (value) => dispatch(loadVolunteer(value)),
 })
 
 export default connect(
