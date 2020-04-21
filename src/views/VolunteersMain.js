@@ -25,6 +25,7 @@ const columns = [
     title: 'Name',
     dataIndex: 'full_name',
     fixed: 'left',
+    sorter: (a1, a2) => a1.full_name.localeCompare(a2.full_name)
   },
   {
     title: 'Email',
@@ -34,6 +35,7 @@ const columns = [
     title: 'Date of Birth',
     dataIndex: 'dob',
     render: (text, record, index) => formatDate(text),
+    sorter: (a1, a2) => a1.dob.localeCompare(a2.dob)
   },
   {
     title: 'Address',
@@ -54,6 +56,7 @@ const columns = [
   {
     title: 'Gender',
     dataIndex: 'gender',
+    sorter: (a1, a2) => a1.gender.localeCompare(a2.gender)
   },
   {
     title: 'Phone No.',

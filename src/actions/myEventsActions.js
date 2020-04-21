@@ -6,6 +6,16 @@ import {
   MY_EVENTS_CLOSE_VIEW,
 } from '../variables/constants/MyEventsConstants'
 import {getEventsOfVolunteerAPI} from '../api/EventsAPI'
+import moment from 'moment'
+
+function eventSortFunc(e1, e2) {
+  const e1moment = moment(e1.start_date)
+  if (e1moment.isSame(e2.start_date, 'day')) {
+    return e1.id - e2.id
+  } else {
+    return e1moment.isBefore(e2.start_date) ? -1 : 1
+  }
+}
 
 export function getMyEvents() {
   return function(dispatch) {
@@ -13,6 +23,7 @@ export function getMyEvents() {
     return getEventsOfVolunteerAPI()
       .then(json => {
         if (json.status === 200) {
+          const data = json.data.sort(eventSortFunc)
           dispatch(getMyEventsSuccess(json.data))
         } else {
           dispatch(getMyEventsFailure())

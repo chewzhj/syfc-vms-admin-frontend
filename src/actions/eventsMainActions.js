@@ -8,6 +8,16 @@ import {
   EVENTS_MAIN_EV_MODAL_CLOSE,
 } from '../variables/constants/EventsMainConstants'
 import { getAllEventsAPI, getVolunteersInEventAPI } from '../api/EventsAPI'
+import moment from 'moment'
+
+function eventSortFunc(e1, e2) {
+  const e1moment = moment(e1.start_date)
+  if (e1moment.isSame(e2.start_date, 'day')) {
+    return e1.id - e2.id
+  } else {
+    return e1moment.isBefore(e2.start_date) ? -1 : 1
+  }
+}
 
 export function retrieveEvents() {
   return function(dispatch) {
@@ -15,6 +25,7 @@ export function retrieveEvents() {
     return getAllEventsAPI()
       .then(json => {
         if (json.status === 200) {
+          const data = json.data.sort(eventSortFunc)
           dispatch(retrieveEventsSuccess(json.data))
         } else {
           dispatch(retrieveEventsFailure())

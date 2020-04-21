@@ -49,6 +49,7 @@ export default class EventsMain extends React.Component {
       dataIndex: 'name',
       ellipsis: true,
       width: 100,
+      sorter: (a1, a2) => a1.name.localeCompare(a2.name),
     },
     {
       title: 'Description',
@@ -61,24 +62,27 @@ export default class EventsMain extends React.Component {
       dataIndex: 'start_date',
       render: (text, record, index) => formatDate(text),
       width: 120,
+      sorter: (a1, a2) => a1.start_date.localeCompare(a2.start_date),
+      defaultSortOrder: 'ascend',
     },
     {
       title: 'End Date',
       dataIndex: 'end_date',
       render: (text, record, index) => formatDate(text),
       width: 120,
+      sorter: (a1, a2) => a1.end_date.localeCompare(a2.end_date),
     },
     {
       title: 'Actions',
       render: (text, record, index) => {
         return (
           <div>
-            <Tooltip title='Edit Event'>
-              <Button onClick={e => this.clickEdit(e, record.id)} href='/events/edit' shape='circle' icon={<EditOutlined/>}/>
-            </Tooltip>
-            <Divider type='vertical'/>
             <Tooltip title='View Volunteers'>
               <Button onClick={e => this.clickView(e, record.id)} shape='circle' icon={<UserOutlined/>}/>
+            </Tooltip>
+            <Divider type='vertical'/>
+            <Tooltip title='Edit Event'>
+              <Button onClick={e => this.clickEdit(e, record.id)} href='/events/edit' shape='circle' icon={<EditOutlined/>}/>
             </Tooltip>
           </div>
         )
