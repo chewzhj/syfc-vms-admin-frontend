@@ -7,7 +7,6 @@ import {
   Card,
   Input,
   DatePicker,
-  Popconfirm,
   Select,
   Radio,
   notification,
@@ -420,15 +419,14 @@ export default class VolunteersEdit extends React.Component {
         {/* Top Row Action Buttons - Discard, Previous, Next */}
         <Row justify="space-between">
           {/* Discard button */}
-          <Col lg={6} md={6} sm={12} xs={12} style={{ marginTop: 10 }}>
-
+          <Col lg={6} md={6} sm={12} xs={24} style={{ marginTop: 10 }}>
               <Button onClick={this.discard} style={{ float: 'left', marginRight: 10, marginTop: 10 }}>
                 Discard Change
               </Button>
           </Col>
 
           {/* Previous and Next Buttons for Stepper - Visibility */}
-          <Col lg={12} md={12} sm={12} xs={12} style={{ marginTop: 10 }}>
+          <Col lg={12} md={12} sm={12} xs={24} style={{ marginTop: 10 }}>
             <Button
               onClick={this.clickSubmit}
               loading={submitting}

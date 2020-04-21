@@ -26,7 +26,7 @@ export function retrieveEvents() {
       .then(json => {
         if (json.status === 200) {
           const data = json.data.sort(eventSortFunc)
-          dispatch(retrieveEventsSuccess(json.data))
+          dispatch(retrieveEventsSuccess(data))
         } else {
           dispatch(retrieveEventsFailure())
         }

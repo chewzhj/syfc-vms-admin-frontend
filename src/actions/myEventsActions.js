@@ -24,7 +24,7 @@ export function getMyEvents() {
       .then(json => {
         if (json.status === 200) {
           const data = json.data.sort(eventSortFunc)
-          dispatch(getMyEventsSuccess(json.data))
+          dispatch(getMyEventsSuccess(data))
         } else {
           dispatch(getMyEventsFailure())
         }
