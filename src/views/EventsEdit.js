@@ -205,7 +205,6 @@ export default class EventsEdit extends React.Component {
           <Row gutter={[30, 30]}>
             <Col md={16} xs={24}>
               <RangePicker
-                // style={datesChanged?{backgroundColor: yellow[1]}:null}
                 format="YYYY-MM-DD"
                 style={datesChanged?{backgroundColor: yellow[1], width: '100%'} : {width:'100%'}}
                 onChange={this.changeDates}

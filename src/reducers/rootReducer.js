@@ -6,6 +6,7 @@ import {eventsCreateReducer} from './eventsCreateReducer'
 import {eventsEditReducer} from './eventsEditReducer'
 import {eventsMainReducer} from './eventsMainReducer'
 import {volunteersCreateReducer} from './volunteersCreateReducer'
+import {volunteersEditReducer} from './volunteersEditReducer'
 import {volunteersMainReducer} from './volunteersMainReducer'
 import {joinEventsReducer} from './joinEventsReducer'
 import {myEventsReducer} from './myEventsReducer'
@@ -20,6 +21,7 @@ export default combineReducers({
   eventsEdit: eventsEditReducer,
   eventsMain: eventsMainReducer,
   volunteersCreate: volunteersCreateReducer,
+  volunteersEdit: volunteersEditReducer,
   volunteersMain: volunteersMainReducer,
   joinEvents: joinEventsReducer,
   myEvents: myEventsReducer,

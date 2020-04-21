@@ -26,6 +26,20 @@ export async function postCreateNewVolunteerAPI(volunteerObject) {
   }
 }
 
+// Volunteers Create
+export async function postUpdateVolunteerAPI(volId, volunteerObject) {
+  try {
+    let data = await API.post('volunteerAPI/updateVolunteer/' + volId,
+      volunteerObject
+    )
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+    return [];
+  }
+}
+
 // Get Volunteer Profile
 export async function getProfileAPI() {
   const volId = sessionStorage.getItem('id')

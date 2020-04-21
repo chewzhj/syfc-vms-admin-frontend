@@ -10,6 +10,7 @@ import EventsCreateContainer from '../containers/EventsCreateContainer'
 import EventsEditContainer from '../containers/EventsEditContainer'
 import VolunteersMainContainer from '../containers/VolunteersMainContainer'
 import VolunteersCreateContainer from '../containers/VolunteersCreateContainer'
+import VolunteersEditContainer from '../containers/VolunteersEditContainer'
 import Login from '../views/Login'
 import LoginStaffContainer from '../containers/LoginStaffContainer'
 import LoginVolunteerContainer from '../containers/LoginVolunteerContainer'
@@ -37,6 +38,7 @@ const Routing = () => {
         <Route exact path="/events" component={EventsMainContainer}/>
 
         <Route exact path="/volunteers/create" component={VolunteersCreateContainer}/>
+        <Route exact path="/volunteers/edit" component={VolunteersEditContainer}/>
         <Route exact path="/volunteers" component={VolunteersMainContainer}/>
         <Route path="/volunteers" component={VolunteersFallthough}/>
 
