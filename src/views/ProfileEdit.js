@@ -14,6 +14,7 @@ import {
 import { yellow } from '@ant-design/colors'
 import {Redirect} from 'react-router-dom'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
+import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
 
 const {Option} = Select
 
@@ -164,7 +165,7 @@ export default class ProfileEdit extends React.Component {
       number,
     } = this.props.profileEdit
 
-    const dtf = 'YYYY-MM-DD'
+    const dtf = internalDateFormat
 
     const messageBody = {
       full_name: name.trim(),
@@ -297,6 +298,7 @@ export default class ProfileEdit extends React.Component {
               <DatePicker
                 style={dobChanged?{backgroundColor: yellow[1], width: '100%'} : {width:'100%'}}
                 placeholder={VolunteersPhrases.CREATE_FORM_TITLE_DOB}
+                format={displayDateFormat}
                 value={dob}
                 onChange={this.changeDob}
               />

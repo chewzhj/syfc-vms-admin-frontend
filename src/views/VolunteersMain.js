@@ -12,13 +12,14 @@ import {
 } from '@ant-design/icons'
 import moment from 'moment'
 import {Link} from 'react-router-dom'
+import {displayDateFormat} from '../variables/DateFormats'
 
 const formatDate = (rawString) => {
   if (rawString === null || rawString === "") {
     return ""
   }
   const momentObj = moment(rawString)
-  return momentObj.format("YYYY-MM-DD")
+  return momentObj.format(displayDateFormat)
 }
 
 

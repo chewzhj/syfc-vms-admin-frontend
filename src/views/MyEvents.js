@@ -12,6 +12,7 @@ import moment from 'moment'
 import {Link} from 'react-router-dom'
 import EventCard from '../components/EventCard'
 import EventsPhrases from '../phrases/EventsPhrases'
+import {displayDateFormat} from '../variables/DateFormats'
 
 const { Text, Paragraph } = Typography
 
@@ -20,7 +21,7 @@ const formatDate = (rawString) => {
     return ""
   }
   const momentObj = moment(rawString)
-  return momentObj.format("YYYY-MM-DD")
+  return momentObj.format(displayDateFormat)
 }
 
 export default class MyEvents extends React.Component {

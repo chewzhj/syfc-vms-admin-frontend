@@ -13,6 +13,7 @@ import {
   notification,
 } from 'antd'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
+import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
 
 const {Option} = Select
 
@@ -162,7 +163,7 @@ export default class VolunteersCreate extends React.Component {
       number,
     } = this.props.volunteersCreate
 
-    const dtf = 'YYYY-MM-DD'
+    const dtf = internalDateFormat
 
     const messageBody = {
       full_name: name.trim(),
@@ -277,6 +278,7 @@ export default class VolunteersCreate extends React.Component {
               <DatePicker
                 style={{width: '100%'}}
                 placeholder={VolunteersPhrases.CREATE_FORM_TITLE_DOB}
+                format={displayDateFormat}
                 value={dob}
                 onChange={this.changeDob}
               />

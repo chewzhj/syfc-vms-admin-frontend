@@ -17,6 +17,7 @@ import badge5 from '../assets/img/badge_5.png'
 import badge10 from '../assets/img/badge_10.png'
 import badge20 from '../assets/img/badge_20.png'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
+import {displayDateFormat} from '../variables/DateFormats'
 
 const { Title, Text } = Typography
 
@@ -25,7 +26,7 @@ const formatDate = (rawString) => {
     return ""
   }
   const momentObj = moment(rawString)
-  return momentObj.format("YYYY-MM-DD")
+  return momentObj.format(displayDateFormat)
 }
 
 const badges = [

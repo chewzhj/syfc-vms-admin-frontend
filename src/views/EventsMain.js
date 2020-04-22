@@ -20,6 +20,7 @@ import {
 import {Link} from 'react-router-dom'
 import ReactExport from 'react-data-export'
 import EventsPhrases from '../phrases/EventsPhrases'
+import {displayDateFormat} from '../variables/DateFormats'
 
 const { Text, Paragraph } = Typography
 const ExcelFile = ReactExport.ExcelFile
@@ -31,7 +32,7 @@ const formatDate = (rawString) => {
     return ""
   }
   const momentObj = moment(rawString)
-  return momentObj.format("YYYY-MM-DD")
+  return momentObj.format(displayDateFormat)
 }
 
 

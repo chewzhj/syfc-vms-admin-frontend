@@ -13,6 +13,7 @@ import {
 import { yellow } from '@ant-design/colors'
 import { Redirect } from 'react-router-dom'
 import EventsPhrases from '../phrases/EventsPhrases'
+import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
 
 const { RangePicker } = DatePicker
 
@@ -103,7 +104,7 @@ export default class EventsEdit extends React.Component {
       eventDesc,
     } = this.props.eventsEdit
 
-    const dtf = 'YYYY-MM-DD'
+    const dtf = internalDateFormat
 
     const messageBody = {
       name: eventTitle.trim(),
@@ -205,7 +206,7 @@ export default class EventsEdit extends React.Component {
           <Row gutter={[30, 30]}>
             <Col md={16} xs={24}>
               <RangePicker
-                format="YYYY-MM-DD"
+                format={displayDateFormat}
                 style={datesChanged?{backgroundColor: yellow[1], width: '100%'} : {width:'100%'}}
                 onChange={this.changeDates}
                 value={eventDates}

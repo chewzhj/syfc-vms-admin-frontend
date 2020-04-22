@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons'
 import LoginElements from '../components/LoginElements'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
+import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
 
 const {Option} = Select
 const {Title} = Typography
@@ -166,7 +167,7 @@ export default class RegisterVolunteer extends React.Component {
       number,
     } = this.props.registerVolunteer
 
-    const dtf = 'YYYY-MM-DD'
+    const dtf = internalDateFormat
 
     const messageBody = {
       full_name: name.trim(),
@@ -298,6 +299,7 @@ export default class RegisterVolunteer extends React.Component {
             <DatePicker
               style={{width: '100%'}}
               placeholder={VolunteersPhrases.CREATE_FORM_TITLE_DOB}
+              format={displayDateFormat}
               value={dob}
               onChange={this.changeDob}
             />
