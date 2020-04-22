@@ -6,13 +6,16 @@ import {
   Button,
   Card,
   Input,
+  Select,
   DatePicker,
   Popconfirm,
   notification,
 } from 'antd'
 import EventsPhrases from '../phrases/EventsPhrases'
-
+import {displayDateFormat, internalDateFormat} from '../variables/DateFormats'
+import { DropzoneDialog } from 'material-ui-dropzone'
 const { RangePicker } = DatePicker
+const { Option } = Select
 
 export default class EventsCreate extends React.Component {
 
@@ -21,6 +24,9 @@ export default class EventsCreate extends React.Component {
     if (growlMessage) {
       this.onNotification(growlMessage)
     }
+  }
+  state = {
+    openDialog: false
   }
 
   changeTitle = (e) => this.props.changeTitle(e.target.value)
@@ -94,7 +100,7 @@ export default class EventsCreate extends React.Component {
       eventDesc,
     } = this.props.eventsCreate
 
-    const dtf = 'YYYY-MM-DD'
+    const dtf = internalDateFormat
 
     const messageBody = {
       name: eventTitle.trim(),
@@ -167,7 +173,7 @@ export default class EventsCreate extends React.Component {
           <Row gutter={[30, 30]}>
             <Col md={16} xs={24}>
               <RangePicker
-                format="YYYY-MM-DD"
+                format={displayDateFormat}
                 style={{ width: '100%' }}
                 onChange={this.changeDates}
                 value={eventDates}
@@ -187,6 +193,44 @@ export default class EventsCreate extends React.Component {
                 autoSize={{minRows:2, maxRows: 6}}
                 onChange={this.changeDesc}
                 value={eventDesc}
+              />
+            </Col>
+          </Row>
+
+          <Row gutter={[5, 5]}>
+            <Col md={20} xs={24}>
+              {EventsPhrases.SET_EVENTS_ROLES}
+            </Col>
+          </Row>
+          <Row gutter={[30, 30]}>
+            <Col md={16} xs={24}>
+              <Select
+                placeholder={EventsPhrases.EVENTS_ROLES}
+                mode='tags'
+                style={{width: '100%'}}
+                tokenSeparators={[","]}
+                >
+                <Option key="Usher" value="Usher">Usher</Option>
+              </Select>
+            </Col>
+          </Row>
+
+          <Row gutter={[5, 5]}>
+            <Col md={20} xs={24}>
+              {EventsPhrases.EVENTS_PICTURE}
+            </Col>
+          </Row>
+          <Row gutter={[30, 30]}>
+            <Col md={16} xs={24}>
+              <Button onClick={()=>this.setState({openDialog: true})}>Open Dialog</Button>
+              <DropzoneDialog
+                open={this.state.openDialog}
+                // onSave={handleImageSave}
+                acceptedFiles={["image/*"]}
+                showPreviews={true}
+                maxFileSize={5000000}
+                onClose={()=>this.setState({openDialog: false})}
+                showAlerts={true}
               />
             </Col>
           </Row>

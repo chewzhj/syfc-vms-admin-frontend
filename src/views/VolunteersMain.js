@@ -61,6 +61,7 @@ export default class VolunteersMain extends React.Component {
     {
       title: 'Department',
       dataIndex: 'department',
+      sorter: (a1, a2) => a1.department.localeCompare(a2.department)
     },
     {
       title: 'Gender',
