@@ -228,7 +228,7 @@ export default class EventsCreate extends React.Component {
             </Col>
           </Row>
 
-          <Row gutter={[5, 5]}>
+          {/* <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_PICTURE}
             </Col>
@@ -246,7 +246,7 @@ export default class EventsCreate extends React.Component {
                 showAlerts={true}
               />
             </Col>
-          </Row>
+          </Row> */}
         </Card>
 
         {/* Top Row Action Buttons - Discard, Previous, Next */}
