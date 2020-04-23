@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout, Menu, Avatar, Popover, PageHeader, Button } from 'antd';
 import {
   UserOutlined,
+  LockOutlined,
   CalendarOutlined,
   AppstoreAddOutlined,
   DownOutlined,
@@ -116,6 +117,12 @@ const AdminMenu = (props) => {
         <UserOutlined />
         <Link to="/volunteers">
           <span className="nav-text">Volunteers</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="changePassword">
+        <LockOutlined />
+        <Link to="/changePassword">
+          <span className="nav-text">Change Password</span>
         </Link>
       </Menu.Item>
     </Menu>

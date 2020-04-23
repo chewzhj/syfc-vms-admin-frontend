@@ -13,6 +13,7 @@ import EventsEditContainer from '../containers/EventsEditContainer'
 import VolunteersMainContainer from '../containers/VolunteersMainContainer'
 import VolunteersCreateContainer from '../containers/VolunteersCreateContainer'
 import VolunteersEditContainer from '../containers/VolunteersEditContainer'
+import StaffChangePasswordContainer from '../containers/StaffChangePasswordContainer'
 import Login from '../views/Login'
 import LoginStaffContainer from '../containers/LoginStaffContainer'
 import LoginVolunteerContainer from '../containers/LoginVolunteerContainer'
@@ -37,6 +38,8 @@ const Routing = () => {
   } else if (loginType === 'staff') {
     return (
       <Switch>
+        <Route exact path="/changePassword" component={StaffChangePasswordContainer}/>
+
         <Route exact path="/events/create" component={EventsCreateContainer}/>
         <Route exact path="/events/edit" component={EventsEditContainer}/>
         <Route exact path="/events" component={EventsMainContainer}/>

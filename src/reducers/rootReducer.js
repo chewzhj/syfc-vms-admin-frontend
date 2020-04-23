@@ -13,6 +13,7 @@ import {myEventsReducer} from './myEventsReducer'
 import {profileReducer} from './profileReducer'
 import {profileEditReducer} from './profileEditReducer'
 import {profileChangePasswordReducer} from './profileChangePasswordReducer'
+import {staffChangePasswordReducer} from './staffChangePasswordReducer'
 import {counterReducer} from './counterReducer'
 
 export default combineReducers({
@@ -30,5 +31,6 @@ export default combineReducers({
   profile: profileReducer,
   profileEdit: profileEditReducer,
   profileChangePassword: profileChangePasswordReducer,
+  staffChangePassword: staffChangePasswordReducer,
   counter: counterReducer,
 })
