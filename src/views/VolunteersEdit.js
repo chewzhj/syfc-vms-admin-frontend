@@ -15,16 +15,9 @@ import { yellow } from '@ant-design/colors'
 import {Redirect} from 'react-router-dom'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
 import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
+import {deptOptions} from '../variables/DepartmentOptions'
 
 const {Option} = Select
-
-const departments = [
-  "Primary",
-  "Secondary",
-  "JC",
-  "Polytechnic",
-  "University",
-]
 
 export default class VolunteersEdit extends React.Component {
 
@@ -357,7 +350,7 @@ export default class VolunteersEdit extends React.Component {
                 placeholder={VolunteersPhrases.CREATE_FORM_TITLE_DEPT}
                 value={dept}
                 onChange={this.changeDept}>
-                {departments.map(dept => (
+                {deptOptions.map(dept => (
                   <Option key={dept} value={dept}>
                     {dept}
                   </Option>

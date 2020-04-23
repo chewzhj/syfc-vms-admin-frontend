@@ -16,17 +16,10 @@ import {
 import LoginElements from '../components/LoginElements'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
 import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
+import {deptOptions} from '../variables/DepartmentOptions'
 
 const {Option} = Select
 const {Title} = Typography
-
-const departments = [
-  "Primary",
-  "Secondary",
-  "JC",
-  "Polytechnic",
-  "University",
-]
 
 export default class RegisterVolunteer extends React.Component {
 
@@ -375,7 +368,7 @@ export default class RegisterVolunteer extends React.Component {
               value={dept}
               onChange={this.changeDept}
               >
-              {departments.map(dept => (
+              {deptOptions.map(dept => (
                 <Option key={dept} value={dept}>
                   {dept}
                 </Option>
