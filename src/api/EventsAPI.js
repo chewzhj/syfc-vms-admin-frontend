@@ -64,8 +64,8 @@ export async function deleteEventAPI(eventId) {
 }
 
 // Get Events of Volunteer
-export async function getEventsOfVolunteerAPI() {
-  const volId = sessionStorage.getItem('id')
+export async function getEventsOfVolunteerAPI(passedVolId) {
+  const volId = passedVolId || sessionStorage.getItem('id')
   try {
     let data = await API.get('/eventAPI/retrieveVolunteerEvents/' + volId)
     console.log(data);
