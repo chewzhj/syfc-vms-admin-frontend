@@ -34,7 +34,7 @@ export default class ProfileChangePassword extends React.Component {
       checks[0] = true
     }
     checks[1] = check
-    
+
     return checks
   }
   clickSubmit = (check) => {
@@ -107,7 +107,7 @@ export default class ProfileChangePassword extends React.Component {
 
     openNotificationWithIcon(growlNotification)
 
-    this.props.resetNotification()
+    this.props.discard()
 
     if (growlNotification === 'success') {
       this.props.history.push('/profile')
@@ -183,7 +183,7 @@ export default class ProfileChangePassword extends React.Component {
           {/* Previous and Next Buttons for Stepper - Visibility */}
           <Col lg={12} md={12} sm={12} xs={24} style={{ marginTop: 10 }}>
             <Button
-              onClick={this.clickSubmit}
+              onClick={() => this.clickSubmit(confirmed)}
               loading={submitting}
               type='primary'
               style={{ float: 'right', marginTop: 10, marginLeft: 10 }}>
