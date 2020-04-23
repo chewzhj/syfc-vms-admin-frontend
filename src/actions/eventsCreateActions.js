@@ -2,6 +2,7 @@ import {
   EVENTS_CREATE_CHANGE_TITLE,
   EVENTS_CREATE_CHANGE_DATES,
   EVENTS_CREATE_CHANGE_DESC,
+  EVENTS_CREATE_CHANGE_ROLES,
   EVENTS_CREATE_DISCARD,
   EVENTS_CREATE_SUBMIT_START,
   EVENTS_CREATE_SUBMIT_SUCCESS,
@@ -57,6 +58,12 @@ export function changeDates(value) {
 export function changeDesc(value) {
   return {
     type: EVENTS_CREATE_CHANGE_DESC,
+    value
+  }
+}
+export function changeRoles(value) {
+  return {
+    type: EVENTS_CREATE_CHANGE_ROLES,
     value
   }
 }

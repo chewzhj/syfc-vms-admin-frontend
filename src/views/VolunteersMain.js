@@ -13,6 +13,7 @@ import {
 import moment from 'moment'
 import {Link} from 'react-router-dom'
 import {displayDateFormat} from '../variables/DateFormats'
+import {deptOptions} from '../variables/DepartmentOptions'
 
 const formatDate = (rawString) => {
   if (rawString === null || rawString === "") {
@@ -21,8 +22,6 @@ const formatDate = (rawString) => {
   const momentObj = moment(rawString)
   return momentObj.format(displayDateFormat)
 }
-
-
 
 export default class VolunteersMain extends React.Component {
 
@@ -62,7 +61,9 @@ export default class VolunteersMain extends React.Component {
     {
       title: 'Department',
       dataIndex: 'department',
-      sorter: (a1, a2) => a1.department.localeCompare(a2.department)
+      filters: deptOptions.map(dept => ({text: dept, value: dept})),
+      onFilter: (value, record) => record.department.indexOf(value) === 0,
+
     },
     {
       title: 'Gender',

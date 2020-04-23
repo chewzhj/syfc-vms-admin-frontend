@@ -3,6 +3,7 @@ import {
   EVENTS_EDIT_CHANGE_TITLE,
   EVENTS_EDIT_CHANGE_DATES,
   EVENTS_EDIT_CHANGE_DESC,
+  EVENTS_EDIT_CHANGE_ROLES,
   EVENTS_EDIT_DISCARD,
   EVENTS_EDIT_SUBMIT_START,
   EVENTS_EDIT_SUBMIT_SUCCESS,
@@ -18,6 +19,7 @@ const initialState = {
   eventTitle: '',
   eventDates: null,
   eventDesc: '',
+  eventRoles: [],
   submitting: false,
   growlMessage: '',
   deleting: false,
@@ -30,6 +32,7 @@ export function eventsEditReducer(state = initialState, action) {
       return {
         ...state,
         ...action.value,
+        eventRoles: action.value.eventRoles.slice(0),
         originalEventDetails: action.value
       }
     case EVENTS_EDIT_CHANGE_TITLE:
@@ -38,6 +41,8 @@ export function eventsEditReducer(state = initialState, action) {
       return {...state, eventDates: action.value}
     case EVENTS_EDIT_CHANGE_DESC:
       return {...state, eventDesc: action.value}
+    case EVENTS_EDIT_CHANGE_ROLES:
+      return {...state, eventRoles: action.value}
     case EVENTS_EDIT_SUBMIT_START:
       return {...state, submitting: true}
     case EVENTS_EDIT_SUBMIT_SUCCESS:

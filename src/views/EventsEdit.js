@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   Input,
+  Select,
   DatePicker,
   Popconfirm,
   notification,
@@ -31,6 +32,7 @@ export default class EventsEdit extends React.Component {
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
   changeDesc = (e) => this.props.changeDesc(e.target.value)
+  changeRoles = (value) => this.props.changeRoles(value)
   discard = () => {
     this.props.discard()
     this.props.history.push('/events')
@@ -45,9 +47,10 @@ export default class EventsEdit extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventRoles,
     } = this.props.eventsEdit
 
-    const checks = (new Array(3)).fill(false)
+    const checks = (new Array(4)).fill(false)
     if (eventTitle.trim() !== '') {
       checks[0] = true
     }
@@ -56,6 +59,9 @@ export default class EventsEdit extends React.Component {
     }
     if (eventDesc.trim() !== '') {
       checks[2] = true
+    }
+    if (eventRoles.length > 0) {
+      checks[3] = true
     }
 
     return checks
@@ -72,6 +78,9 @@ export default class EventsEdit extends React.Component {
     }
     if (!checks[2]) {
       outputs.push(`\n${++i}. Event Description is empty`)
+    }
+    if (!checks[3]) {
+      outputs.push(`\n${++i}. Event Roles are empty`)
     }
 
     const messageNodeBuilder = (errors) => {
@@ -102,6 +111,7 @@ export default class EventsEdit extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventRoles,
     } = this.props.eventsEdit
 
     const dtf = internalDateFormat
@@ -111,6 +121,7 @@ export default class EventsEdit extends React.Component {
       start_date: eventDates[0].format(dtf),
       end_date: eventDates[1].format(dtf),
       description: eventDesc.trim(),
+      roles: eventRoles.sort().join(',')
     }
 
     // console.log(JSON.stringify(messageBody));
@@ -148,6 +159,7 @@ export default class EventsEdit extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventRoles,
       submitting,
       deleting,
     } = this.props.eventsEdit
@@ -159,6 +171,7 @@ export default class EventsEdit extends React.Component {
     const titleChanged = eventTitle !== originalEventDetails.eventTitle
     const datesChanged = eventDates !== originalEventDetails.eventDates
     const descChanged = eventDesc !== originalEventDetails.eventDesc
+    const rolesChanged = JSON.stringify(eventRoles.sort()) !== JSON.stringify(originalEventDetails.eventRoles.sort())
 
     return (
       <SideBar activeTab='events' title="Edit Event">
@@ -227,6 +240,25 @@ export default class EventsEdit extends React.Component {
                 autoSize={{minRows:2, maxRows: 6}}
                 onChange={this.changeDesc}
                 value={eventDesc}
+              />
+            </Col>
+          </Row>
+
+          <Row gutter={[5, 5]}>
+            <Col md={20} xs={24}>
+              {EventsPhrases.SET_EVENTS_ROLES}
+            </Col>
+          </Row>
+          <Row gutter={[30, 30]}>
+            <Col md={16} xs={24}>
+              <Select
+                placeholder={EventsPhrases.EVENTS_ROLES}
+                mode='tags'
+                // cant make the color work
+                style={rolesChanged?{backgroundColor: yellow[1], width: '100%'} : {width:'100%'}}
+                tokenSeparators={[","]}
+                onChange={this.changeRoles}
+                value={eventRoles}
               />
             </Col>
           </Row>

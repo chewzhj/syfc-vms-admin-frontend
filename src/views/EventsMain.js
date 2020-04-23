@@ -108,6 +108,7 @@ export default class EventsMain extends React.Component {
         eventTitle: editEvent.name,
         eventDates: [startDateMoment, endDateMoment],
         eventDesc: editEvent.description,
+        eventRoles: editEvent.roles.split(","),
       }
 
       this.props.loadEvent(editObj)
@@ -185,7 +186,13 @@ export default class EventsMain extends React.Component {
                 <Text strong>{EventsPhrases.EVENTS_DATES}</Text>
               </Col>
               <Col span={16}>
-                <Text ellipsis>{formatDate(selectedEventDetails.start_date)} - {formatDate(selectedEventDetails.end_date)}</Text>
+                <Paragraph ellipsis>{formatDate(selectedEventDetails.start_date)} - {formatDate(selectedEventDetails.end_date)}</Paragraph>
+              </Col>
+              <Col span={8}>
+                <Text strong>{EventsPhrases.EVENTS_ROLES}</Text>
+              </Col>
+              <Col span={16}>
+                <Text>{selectedEventDetails.roles}</Text>
               </Col>
 
               <Col span={24}>
@@ -215,6 +222,7 @@ export default class EventsMain extends React.Component {
           loading={eventsLoading}
           columns={this.columns}
           rowKey='id'
+          showSorterTooltip
           bordered
         />
       </SideBar>

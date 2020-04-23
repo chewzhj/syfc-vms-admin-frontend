@@ -32,6 +32,7 @@ export default class EventsCreate extends React.Component {
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
   changeDesc = (e) => this.props.changeDesc(e.target.value)
+  changeRoles = (value) => this.props.changeRoles(value)
   discard = () => {
     this.props.discard()
     this.props.history.push('/events')
@@ -42,9 +43,10 @@ export default class EventsCreate extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventRoles,
     } = this.props.eventsCreate
 
-    const checks = (new Array(3)).fill(false)
+    const checks = (new Array(4)).fill(false)
     if (eventTitle.trim() !== '') {
       checks[0] = true
     }
@@ -53,6 +55,9 @@ export default class EventsCreate extends React.Component {
     }
     if (eventDesc.trim() !== '') {
       checks[2] = true
+    }
+    if (eventRoles.length > 0) {
+      checks[3] = true
     }
 
     return checks
@@ -69,6 +74,9 @@ export default class EventsCreate extends React.Component {
     }
     if (!checks[2]) {
       outputs.push(`\n${++i}. Event Description is empty`)
+    }
+    if (!checks[3]) {
+      outputs.push(`\n${++i}. Event Roles are empty`)
     }
 
     const messageNodeBuilder = (errors) => {
@@ -98,6 +106,7 @@ export default class EventsCreate extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventRoles
     } = this.props.eventsCreate
 
     const dtf = internalDateFormat
@@ -107,6 +116,7 @@ export default class EventsCreate extends React.Component {
       start_date: eventDates[0].format(dtf),
       end_date: eventDates[1].format(dtf),
       description: eventDesc.trim(),
+      roles: eventRoles.sort().join(","),
     }
 
     // console.log(JSON.stringify(messageBody));
@@ -143,6 +153,7 @@ export default class EventsCreate extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventRoles,
       submitting,
     } = this.props.eventsCreate
 
@@ -209,6 +220,8 @@ export default class EventsCreate extends React.Component {
                 mode='tags'
                 style={{width: '100%'}}
                 tokenSeparators={[","]}
+                onChange={this.changeRoles}
+                value={eventRoles}
                 >
                 <Option key="Usher" value="Usher">Usher</Option>
               </Select>

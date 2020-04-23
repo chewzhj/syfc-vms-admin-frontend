@@ -3,6 +3,7 @@ import {
   EVENTS_EDIT_CHANGE_TITLE,
   EVENTS_EDIT_CHANGE_DATES,
   EVENTS_EDIT_CHANGE_DESC,
+  EVENTS_EDIT_CHANGE_ROLES,
   EVENTS_EDIT_DISCARD,
   EVENTS_EDIT_SUBMIT_START,
   EVENTS_EDIT_SUBMIT_SUCCESS,
@@ -102,6 +103,12 @@ export function changeDates(value) {
 export function changeDesc(value) {
   return {
     type: EVENTS_EDIT_CHANGE_DESC,
+    value
+  }
+}
+export function changeRoles(value) {
+  return {
+    type: EVENTS_EDIT_CHANGE_ROLES,
     value
   }
 }
