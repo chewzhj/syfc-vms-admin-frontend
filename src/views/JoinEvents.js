@@ -4,6 +4,7 @@ import {
   Row,
   Col,
   Button,
+  Select,
   Spin,
   Skeleton,
   Modal,
@@ -16,6 +17,7 @@ import EventCard from '../components/EventCard'
 import EventsPhrases from '../phrases/EventsPhrases'
 import {displayDateFormat} from '../variables/DateFormats'
 
+const { Option } = Select
 const { Text, Paragraph } = Typography
 
 const formatDate = (rawString) => {
@@ -40,11 +42,19 @@ export default class JoinEvents extends React.Component {
   }
 
   viewEvent = (id) => this.props.viewEvent(id)
+  changeRole = (value) => this.props.changeRole(value)
   closeView = () => this.props.closeView()
   joinEvent = () => {
-    const {viewEvent} = this.props.joinEvents
+    const {viewEvent, role} = this.props.joinEvents
 
-    this.props.joinEvent(viewEvent)
+    if (role === '') {
+      notification.warning({
+        message: 'Event Creation Error',
+        description: 'Select a role to join!'
+      })
+    } else {
+      this.props.joinEvent(viewEvent, role)
+    }
   }
 
   onNotification = (growlNotification) => {
@@ -96,7 +106,7 @@ export default class JoinEvents extends React.Component {
     const {viewEvent} = this.props.joinEvents
 
     const filtered = eventsList.filter(evt => evt.id === viewEvent)
-    console.log(filtered);
+
     if (filtered.length === 1) {
       return filtered[0]
     } else {
@@ -107,7 +117,7 @@ export default class JoinEvents extends React.Component {
   render() {
     const { myEventsLoading } = this.props.myEvents
     const { eventsLoading } = this.props.eventsMain
-    const { viewEventVisible, joining } = this.props.joinEvents
+    const { viewEventVisible, joining, role } = this.props.joinEvents
     const availableEvents = this.generateAvailableUnjoinedEvents()
     const viewEvent = this.filterEvent()
 
@@ -139,6 +149,22 @@ export default class JoinEvents extends React.Component {
                 </Col>
                 <Col span={24}>
                   <Text ellipsis>{formatDate(viewEvent.start_date)} - {formatDate(viewEvent.end_date)}</Text>
+                </Col>
+                <Col span={24}>
+                  <Text strong>{EventsPhrases.CHOOSE_EVENTS_ROLE}</Text>
+                </Col>
+                <Col span={24}>
+                  <Select
+                    placeholder={EventsPhrases.CHOOSE_EVENTS_ROLE}
+                    value={role}
+                    onChange={this.changeRole}
+                    style={{width: '100%', margin: '4px 0'}}>
+                    {viewEvent.roles.split(",").map(r => (
+                      <Option key={r} value={r}>
+                        {r}
+                      </Option>
+                    ))}
+                  </Select>
                 </Col>
 
                 <Button

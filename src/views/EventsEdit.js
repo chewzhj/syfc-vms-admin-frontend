@@ -254,6 +254,7 @@ export default class EventsEdit extends React.Component {
               <Select
                 placeholder={EventsPhrases.EVENTS_ROLES}
                 mode='tags'
+                open={false}
                 // cant make the color work
                 style={rolesChanged?{backgroundColor: yellow[1], width: '100%'} : {width:'100%'}}
                 tokenSeparators={[","]}

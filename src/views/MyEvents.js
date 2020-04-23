@@ -37,7 +37,7 @@ export default class MyEvents extends React.Component {
     const {myEventsList, viewEvent} = this.props.myEvents
 
     const filtered = myEventsList.filter(evt => evt.id === viewEvent)
-    console.log(filtered);
+
     if (filtered.length === 1) {
       return filtered[0]
     } else {
@@ -81,6 +81,18 @@ export default class MyEvents extends React.Component {
                 </Col>
                 <Col span={24}>
                   <Text ellipsis>{formatDate(viewEvent.start_date)} - {formatDate(viewEvent.end_date)}</Text>
+                </Col>
+                <Col span={24}>
+                  <Text strong>{EventsPhrases.EVENTS_ROLES}</Text>
+                </Col>
+                <Col span={24}>
+                  <Text ellipsis>{viewEvent.roles}</Text>
+                </Col>
+                <Col span={24}>
+                  <Text strong>{EventsPhrases.MY_ROLE}</Text>
+                </Col>
+                <Col span={24}>
+                  <Text ellipsis>{viewEvent.volunteer_event.role}</Text>
                 </Col>
               </Row>
             }

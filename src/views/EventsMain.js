@@ -108,7 +108,7 @@ export default class EventsMain extends React.Component {
         eventTitle: editEvent.name,
         eventDates: [startDateMoment, endDateMoment],
         eventDesc: editEvent.description,
-        eventRoles: editEvent.roles.split(","),
+        eventRoles: editEvent.roles ? editEvent.roles.split(",") : [],
       }
 
       this.props.loadEvent(editObj)

@@ -218,6 +218,7 @@ export default class EventsCreate extends React.Component {
               <Select
                 placeholder={EventsPhrases.EVENTS_ROLES}
                 mode='tags'
+                open={false}
                 style={{width: '100%'}}
                 tokenSeparators={[","]}
                 onChange={this.changeRoles}

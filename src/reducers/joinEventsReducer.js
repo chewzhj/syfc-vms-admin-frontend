@@ -3,6 +3,7 @@ import {
   JOIN_EVENTS_JOIN_SUCCESS,
   JOIN_EVENTS_JOIN_FAILURE,
   JOIN_EVENTS_VIEW_EVENT,
+  JOIN_EVENTS_CHANGE_ROLE,
   JOIN_EVENTS_CLOSE_VIEW,
   JOIN_EVENTS_RESET_NOTIFICATION,
 } from '../variables/constants/JoinEventsConstants'
@@ -10,6 +11,7 @@ import {
 const initialState = {
   viewEvent: '',
   viewEventVisible: false,
+  role: '',
   joining: false,
   growlMessage: '',
 }
@@ -26,8 +28,10 @@ export function joinEventsReducer(state = initialState, action) {
       return {...state, growlMessage: ''}
     case JOIN_EVENTS_VIEW_EVENT:
       return {...state, viewEvent: action.value, viewEventVisible: true}
+    case JOIN_EVENTS_CHANGE_ROLE:
+      return {...state, role: action.value}
     case JOIN_EVENTS_CLOSE_VIEW:
-      return {...state, viewEvent: '', viewEventVisible: false}
+      return {...state, viewEvent: '', role: '', viewEventVisible: false}
     default:
       return state
   }

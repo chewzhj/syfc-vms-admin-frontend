@@ -76,11 +76,13 @@ export async function getEventsOfVolunteerAPI(passedVolId) {
   }
 }
 
-export async function postJoinEventAPI(eventId) {
+export async function postJoinEventAPI(eventId, role) {
   const volId = sessionStorage.getItem('id')
   console.log(eventId, volId);
   try {
-    let data = await API.post(`/eventAPI/volunteerJoinEvent/${eventId}&${volId}`)
+    let data = await API.post(`/eventAPI/volunteerJoinEvent/${eventId}&${volId}`, {
+      role: role
+    })
     console.log(data);
     return data
   } catch (e) {

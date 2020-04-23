@@ -5,6 +5,7 @@ import { retrieveEvents } from '../actions/eventsMainActions'
 import {
   joinEvent,
   viewEvent,
+  changeRole,
   closeView,
   resetNotification,
 } from '../actions/joinEventsActions'
@@ -18,8 +19,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getMyEvents: () => dispatch(getMyEvents()),
   retrieveEvents: () => dispatch(retrieveEvents()),
-  joinEvent: (value) => dispatch(joinEvent(value)),
+  joinEvent: (eventId, role) => dispatch(joinEvent(eventId, role)),
   viewEvent: (value) => dispatch(viewEvent(value)),
+  changeRole: (value) => dispatch(changeRole(value)),
   closeView: () => dispatch(closeView()),
   resetNotification: () => dispatch(resetNotification()),
 })
