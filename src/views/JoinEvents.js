@@ -3,6 +3,7 @@ import SideBar from '../components/SideBar'
 import {
   Row,
   Col,
+  Card,
   Button,
   Select,
   Spin,
@@ -151,6 +152,31 @@ export default class JoinEvents extends React.Component {
                   <Text ellipsis>{formatDate(viewEvent.start_date)} - {formatDate(viewEvent.end_date)}</Text>
                 </Col>
                 <Col span={24}>
+                  <Card
+                    style={{marginTop: 12}}
+                    size='small'>
+                    <Text strong>{EventsPhrases.CHOOSE_EVENTS_ROLE}</Text>
+                    <Select
+                      placeholder={EventsPhrases.CHOOSE_EVENTS_ROLE}
+                      value={role}
+                      onChange={this.changeRole}
+                      style={{width: '100%', margin: '4px 0'}}>
+                      {viewEvent.roles.split(",").map(r => (
+                        <Option key={r} value={r}>
+                          {r}
+                        </Option>
+                      ))}
+                    </Select>
+                    <Button
+                      type='primary'
+                      loading={joining}
+                      style={{width: '100%', marginTop: 24}}
+                      onClick={this.joinEvent}>
+                      Join Event
+                    </Button>
+                  </Card>
+                </Col>
+                {/* <Col span={24}>
                   <Text strong>{EventsPhrases.CHOOSE_EVENTS_ROLE}</Text>
                 </Col>
                 <Col span={24}>
@@ -173,7 +199,7 @@ export default class JoinEvents extends React.Component {
                   style={{width: '100%', marginTop: 24}}
                   onClick={this.joinEvent}>
                   Join Event
-                </Button>
+                </Button> */}
               </Row>
             }
           </Skeleton>

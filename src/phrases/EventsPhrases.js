@@ -3,7 +3,7 @@ const EVENTS_DATES = 'Event Dates'
 const EVENTS_DESCRIPTION = 'Event Description'
 const EVENTS_ROLES = 'Event Roles'
 const SET_EVENTS_ROLES = 'Set Event Roles (Separate Roles by comma or Enter)'
-const CHOOSE_EVENTS_ROLE = 'Event Roles (Choose a role before joining)'
+const CHOOSE_EVENTS_ROLE = 'Choose a Role'
 const MY_ROLE = "My Role"
 const EVENTS_PICTURE = 'Event Picture'
 
