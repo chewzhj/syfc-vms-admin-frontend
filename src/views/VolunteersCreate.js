@@ -172,7 +172,6 @@ export default class VolunteersCreate extends React.Component {
       number: number.trim(),
     }
 
-    // console.log(JSON.stringify(messageBody));
     this.props.createVolunteer(messageBody)
   }
 

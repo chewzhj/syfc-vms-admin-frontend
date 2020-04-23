@@ -170,7 +170,6 @@ export default class VolunteersEdit extends React.Component {
       number: number.trim(),
     }
 
-    // console.log(JSON.stringify(messageBody));
     this.props.editVolunteer(originalVolDetails.id, messageBody)
   }
 

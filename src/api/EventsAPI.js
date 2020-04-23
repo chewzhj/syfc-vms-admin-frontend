@@ -4,10 +4,8 @@ import API from './APIConfig'
 export async function getAllEventsAPI() {
   try {
     let data = await API.get('eventAPI/retrieveAllEvents')
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -15,10 +13,8 @@ export async function getAllEventsAPI() {
 export async function getVolunteersInEventAPI(eventId) {
   try {
     let data = await API.get('eventAPI/retrieveVolunteersInEvent/' + eventId)
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -29,10 +25,8 @@ export async function postCreateNewEventAPI(eventObject) {
     let data = await API.post('eventAPI/createEvent',
       eventObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -43,10 +37,8 @@ export async function postUpdateEventAPI(eventId, eventObject) {
     let data = await API.post('eventAPI/updateEvent/' + eventId,
       eventObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -55,10 +47,8 @@ export async function postUpdateEventAPI(eventId, eventObject) {
 export async function deleteEventAPI(eventId) {
   try {
     let data = await API.delete('eventAPI/deleteEvent/' + eventId)
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -68,25 +58,20 @@ export async function getEventsOfVolunteerAPI(passedVolId) {
   const volId = passedVolId || sessionStorage.getItem('id')
   try {
     let data = await API.get('/eventAPI/retrieveVolunteerEvents/' + volId)
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
 
 export async function postJoinEventAPI(eventId, role) {
   const volId = sessionStorage.getItem('id')
-  console.log(eventId, volId);
   try {
     let data = await API.post(`/eventAPI/volunteerJoinEvent/${eventId}&${volId}`, {
       role: role
     })
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }

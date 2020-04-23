@@ -6,10 +6,8 @@ export async function postStaffLoginAPI(staffLoginObject) {
     let data = await API.post('staffAPI/staffLogin',
       staffLoginObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -20,10 +18,8 @@ export async function postVolunteerLoginAPI(volunteerLoginObject) {
     let data = await API.post('volunteerAPI/volunteerLogin',
       volunteerLoginObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }

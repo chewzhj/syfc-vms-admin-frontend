@@ -4,10 +4,8 @@ import API from './APIConfig'
 export async function getAllVolunteersAPI() {
   try {
     let data = await API.get('volunteerAPI/retrieveAllVolunteers')
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -18,10 +16,8 @@ export async function postCreateNewVolunteerAPI(volunteerObject) {
     let data = await API.post('volunteerAPI/createVolunteer',
       volunteerObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -32,10 +28,8 @@ export async function postUpdateVolunteerAPI(volId, volunteerObject) {
     let data = await API.post('volunteerAPI/updateVolunteer/' + volId,
       volunteerObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -45,10 +39,8 @@ export async function getProfileAPI() {
   const volId = sessionStorage.getItem('id')
   try {
     let data = await API.get('volunteerAPI/retrieveVolunteer/' + volId)
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }
@@ -60,10 +52,8 @@ export async function postChangePasswordAPI(passwordObject) {
     let data = await API.post('volunteerAPI/changeVolunteerPassword/' + volId,
       passwordObject
     )
-    console.log(data);
     return data
   } catch (e) {
-    console.log(`😱 Axios request failed: ${e}`);
     return [];
   }
 }

@@ -119,7 +119,6 @@ export default class EventsCreate extends React.Component {
       roles: eventRoles.sort().join(","),
     }
 
-    // console.log(JSON.stringify(messageBody));
     this.props.submitEvent(messageBody)
   }
 

@@ -124,7 +124,6 @@ export default class EventsEdit extends React.Component {
       roles: eventRoles.sort().join(',')
     }
 
-    // console.log(JSON.stringify(messageBody));
     this.props.editEvent(originalEventDetails.id, messageBody)
   }
 
