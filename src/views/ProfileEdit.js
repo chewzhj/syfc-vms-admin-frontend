@@ -49,7 +49,6 @@ export default class ProfileEdit extends React.Component {
     const {
       name,
       email,
-      password,
       dob,
       nric,
       address,
@@ -67,9 +66,9 @@ export default class ProfileEdit extends React.Component {
     if (email.trim() !== '') {
       checks[1] = true
     }
-    if (password.trim() !== '') {
-      checks[2] = true
-    }
+    // no pw check
+    checks[2] = true
+
     if (dob !== null) {
       checks[3] = true
     }
@@ -147,7 +146,6 @@ export default class ProfileEdit extends React.Component {
       originalVolDetails,
       name,
       email,
-      password,
       dob,
       nric,
       address,
@@ -163,7 +161,7 @@ export default class ProfileEdit extends React.Component {
     const messageBody = {
       full_name: name.trim(),
       email: email.trim(),
-      password: password.trim(),
+      password: null,
       dob: dob.format(dtf),
       nric: nric.trim(),
       address: address.trim(),
@@ -208,7 +206,6 @@ export default class ProfileEdit extends React.Component {
       originalVolDetails,
       name,
       email,
-      password,
       dob,
       nric,
       address,
@@ -224,7 +221,6 @@ export default class ProfileEdit extends React.Component {
     }
     const nameChanged = name !== originalVolDetails.name
     const emailChanged = email !== originalVolDetails.email
-    const passwordChanged = password !== originalVolDetails.password
     const dobChanged = !dob.isSame(originalVolDetails.dob, 'day')
     const nricChanged = nric !== originalVolDetails.nric
     const addressChanged = address !== originalVolDetails.address
@@ -263,21 +259,6 @@ export default class ProfileEdit extends React.Component {
                 placeholder={VolunteersPhrases.CREATE_FORM_TITLE_EMAIL}
                 value={email}
                 onChange={this.changeEmail}
-              />
-            </Col>
-          </Row>
-
-          {/* Password Field */}
-          <Row gutter={[5, 5]} style={{ marginTop: 10}}>
-            <Col sm={6} xs={22} style={{lineHeight: '31px'}}>
-              {VolunteersPhrases.CREATE_FORM_TITLE_PW}
-            </Col>
-            <Col sm={18} xs={22}>
-              <Input.Password
-                style={passwordChanged?{backgroundColor: yellow[1]}:null}
-                placeholder={VolunteersPhrases.CREATE_FORM_TITLE_PW}
-                value={password}
-                onChange={this.changePassword}
               />
             </Col>
           </Row>

@@ -52,3 +52,18 @@ export async function getProfileAPI() {
     return [];
   }
 }
+
+// Change password as Volunteer
+export async function postChangePasswordAPI(passwordObject) {
+  const volId = sessionStorage.getItem('id')
+  try {
+    let data = await API.post('volunteerAPI/changeVolunteerPassword/' + volId,
+      passwordObject
+    )
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(`😱 Axios request failed: ${e}`);
+    return [];
+  }
+}

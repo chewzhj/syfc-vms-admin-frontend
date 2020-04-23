@@ -8,9 +8,11 @@ import {
   Spin,
   Typography,
 } from 'antd'
+import {Link} from 'react-router-dom'
 import moment from 'moment'
 import {
   EditOutlined,
+  LockOutlined,
 } from '@ant-design/icons'
 import badge3 from '../assets/img/badge_3.png'
 import badge5 from '../assets/img/badge_5.png'
@@ -84,7 +86,6 @@ export default class Profile extends React.Component {
       id: editVol.id,
       name: editVol.full_name,
       email: editVol.email,
-      password: editVol.password,
       dob: dobMoment,
       nric: editVol.nric,
       address: editVol.address,
@@ -127,6 +128,12 @@ export default class Profile extends React.Component {
           My Details
           <Tooltip title='Edit Details'>
             <Button onClick={this.clickEdit} href='/profile/edit' shape='circle' icon={<EditOutlined/>} style={{marginLeft: 12}}/>
+          </Tooltip>
+
+          <Tooltip title='Change Password'>
+            <Link to='/profile/changePassword'>
+              <Button shape='circle' icon={<LockOutlined/>} style={{marginLeft: 12}}/>
+            </Link>
           </Tooltip>
         </Title>
 

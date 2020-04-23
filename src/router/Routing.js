@@ -5,6 +5,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import JoinEventsContainer from '../containers/JoinEventsContainer'
 import MyEventsContainer from '../containers/MyEventsContainer'
 import ProfileEditContainer from '../containers/ProfileEditContainer'
+import ProfileChangePasswordContainer from '../containers/ProfileChangePasswordContainer'
 import ProfileContainer from '../containers/ProfileContainer'
 import EventsMainContainer from '../containers/EventsMainContainer'
 import EventsCreateContainer from '../containers/EventsCreateContainer'
@@ -26,6 +27,7 @@ const Routing = () => {
         <Route exact path="/events" component={MyEventsContainer}/>
         <Route exact path="/joinevents" component={JoinEventsContainer}/>
         <Route exact path="/profile/edit" component={ProfileEditContainer}/>
+        <Route exact path="/profile/changePassword" component={ProfileChangePasswordContainer}/>
         <Route exact path="/profile" component={ProfileContainer}/>
 
         {/* fall through */}

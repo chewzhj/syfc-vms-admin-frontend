@@ -48,7 +48,6 @@ export default class VolunteersEdit extends React.Component {
     const {
       name,
       email,
-      // password,
       dob,
       nric,
       address,
@@ -145,7 +144,6 @@ export default class VolunteersEdit extends React.Component {
       originalVolDetails,
       name,
       email,
-      password,
       dob,
       nric,
       address,
@@ -161,7 +159,7 @@ export default class VolunteersEdit extends React.Component {
     const messageBody = {
       full_name: name.trim(),
       email: email.trim(),
-      password: password.trim(),
+      password: null,
       dob: dob.format(dtf),
       nric: nric.trim(),
       address: address.trim(),
