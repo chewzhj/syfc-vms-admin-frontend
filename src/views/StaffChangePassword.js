@@ -27,13 +27,16 @@ export default class StaffChangePassword extends React.Component {
     this.props.history.push('/events')
   }
   checkSubmit = (check) => {
-    const {oldPassword} = this.props.staffChangePassword
-    const checks = (new Array(2)).fill(false)
+    const {oldPassword, newPassword} = this.props.staffChangePassword
+    const checks = (new Array(3)).fill(false)
 
     if (oldPassword.trim() !== '') {
       checks[0] = true
     }
-    checks[1] = check
+    if (newPassword.trim() !== '') {
+      checks[1] = true
+    }
+    checks[2] = check
 
     return checks
   }
@@ -43,6 +46,7 @@ export default class StaffChangePassword extends React.Component {
     const outputs = []
     const errorMessages = [
       'Old Password is empty',
+      'New Password is empty',
       'Passwords do not match',
     ]
     for (const idx in errorMessages) {

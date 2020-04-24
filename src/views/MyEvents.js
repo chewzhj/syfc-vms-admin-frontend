@@ -86,7 +86,7 @@ export default class MyEvents extends React.Component {
                   <Text strong>{EventsPhrases.EVENTS_ROLES}</Text>
                 </Col>
                 <Col span={24}>
-                  <Text ellipsis>{viewEvent.roles}</Text>
+                  <Paragraph ellipsis={{rows: 3}}>{viewEvent.roles}</Paragraph>
                 </Col>
                 <Col span={24}>
                   <Text strong>{EventsPhrases.MY_ROLE}</Text>
