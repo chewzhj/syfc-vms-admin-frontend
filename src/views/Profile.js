@@ -32,10 +32,10 @@ const formatDate = (rawString) => {
 }
 
 const badges = [
-  {src: badge3, alt: 'Attended 3 Events'},
-  {src: badge5, alt: 'Attended 5 Events'},
-  {src: badge10, alt: 'Attended 10 Events'},
-  {src: badge20, alt: 'Attended 20 Events'},
+  {src: badge3, alt: 'Attended 3 Events', count: 3},
+  {src: badge5, alt: 'Attended 5 Events', count: 5},
+  {src: badge10, alt: 'Attended 10 Events', count: 10},
+  {src: badge20, alt: 'Attended 20 Events', count: 20},
 ]
 
 const labels = [
@@ -55,8 +55,21 @@ export default class Profile extends React.Component {
 
   componentDidMount() {
     this.props.getProfile()
+    this.props.getMyEvents()
   }
 
+  countParticipationBadges = () => {
+    const {myEventsList} = this.props.myEvents
+
+    let count = 0
+    const now = moment()
+    myEventsList.forEach((event) => {
+      if (now.isAfter(event.end_date)) {
+        count++
+      }
+    })
+    return badges.filter(badge => badge.count <= count)
+  }
   processValues = (profileObject) => {
     if (profileObject) {
       const values = [
@@ -107,23 +120,28 @@ export default class Profile extends React.Component {
       profileObject
     } = this.props.profile
     const profileValues = this.processValues(profileObject)
+    const partBadges = this.countParticipationBadges()
 
     return (
       <SideBar activeTab='profile' title="My Profile">
-        <Title level={4}>
-          My Achievements
-        </Title>
-        <div style={{maxWidth: '100%', overflow: 'scroll hidden', display: 'flex', marginBottom: 12}}>
-          {badges.map(badge => (
-            <span title={badge.alt} key={badge.alt}>
-              <img
-                src={badge.src}
-                alt={badge.alt}
-                style={{width: 103, height: 96, margin: 10}}
-              />
-            </span>
-          ))}
-        </div>
+        {partBadges.length === 0 ||
+          <Title level={4}>
+            My Achievements
+          </Title>
+        }
+        {partBadges.length === 0 ||
+          <div style={{maxWidth: '100%', overflow: 'scroll hidden', display: 'flex', marginBottom: 12}}>
+            {partBadges.map(badge => (
+              <span title={badge.alt} key={badge.alt}>
+                <img
+                  src={badge.src}
+                  alt={badge.alt}
+                  style={{width: 103, height: 96, margin: 10}}
+                />
+              </span>
+            ))}
+          </div>
+        }
         <Title level={4}>
           My Details
           <Tooltip title='Edit Details'>
