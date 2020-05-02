@@ -1,4 +1,5 @@
-import API from './APIConfig'
+import API, {baseURL} from './APIConfig'
+import axios from 'axios'
 
 // Event Main
 export async function getAllEventsAPI() {
@@ -23,7 +24,12 @@ export async function getVolunteersInEventAPI(eventId) {
 export async function postCreateNewEventAPI(eventObject) {
   try {
     let data = await API.post('eventAPI/createEvent',
-      eventObject
+      eventObject,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
     )
     return data
   } catch (e) {
@@ -73,5 +79,16 @@ export async function postJoinEventAPI(eventId, role) {
     return data
   } catch (e) {
     return [];
+  }
+}
+
+export async function getEventPictureAPI(eventId) {
+  try {
+    let data = await axios.get(`${baseURL}eventAPI/getEventPic/${eventId}`)
+    console.log(data);
+    return data
+  } catch (e) {
+    console.log(e);
+    return e;
   }
 }

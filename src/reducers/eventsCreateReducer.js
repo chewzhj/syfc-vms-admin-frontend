@@ -3,6 +3,7 @@ import {
   EVENTS_CREATE_CHANGE_DATES,
   EVENTS_CREATE_CHANGE_DESC,
   EVENTS_CREATE_CHANGE_ROLES,
+  EVENTS_CREATE_CHANGE_PICTURE,
   EVENTS_CREATE_DISCARD,
   EVENTS_CREATE_SUBMIT_START,
   EVENTS_CREATE_SUBMIT_SUCCESS,
@@ -15,6 +16,7 @@ const initialState = {
   eventDates: null,
   eventDesc: '',
   eventRoles: [],
+  eventPicture: [],
   submitting: false,
   growlMessage: '',
 }
@@ -29,6 +31,8 @@ export function eventsCreateReducer(state = initialState, action) {
       return {...state, eventDesc: action.value}
     case EVENTS_CREATE_CHANGE_ROLES:
       return {...state, eventRoles: action.value}
+    case EVENTS_CREATE_CHANGE_PICTURE:
+      return {...state, eventPicture: action.value}
     case EVENTS_CREATE_SUBMIT_START:
       return {...state, submitting: true}
     case EVENTS_CREATE_SUBMIT_SUCCESS:

@@ -13,7 +13,7 @@ import {
 } from 'antd'
 import EventsPhrases from '../phrases/EventsPhrases'
 import {displayDateFormat, internalDateFormat} from '../variables/DateFormats'
-import { DropzoneDialog } from 'material-ui-dropzone'
+import { DropzoneArea } from 'material-ui-dropzone'
 const { RangePicker } = DatePicker
 const { Option } = Select
 
@@ -28,7 +28,7 @@ export default class EventsCreate extends React.Component {
   state = {
     openDialog: false
   }
-
+  changePicture = (files) => this.props.changePicture(files)
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
   changeDesc = (e) => this.props.changeDesc(e.target.value)
@@ -106,20 +106,23 @@ export default class EventsCreate extends React.Component {
       eventTitle,
       eventDates,
       eventDesc,
+      eventPicture,
       eventRoles
     } = this.props.eventsCreate
 
     const dtf = internalDateFormat
 
-    const messageBody = {
-      name: eventTitle.trim(),
-      start_date: eventDates[0].format(dtf),
-      end_date: eventDates[1].format(dtf),
-      description: eventDesc.trim(),
-      roles: eventRoles.sort().join(","),
+    const formData = new FormData()
+    if (eventPicture.length === 1) {
+      formData.append("file", eventPicture[0])
     }
+    formData.append("name", eventTitle.trim())
+    formData.append("start_date", eventDates[0].format(dtf))
+    formData.append("end_date", eventDates[1].format(dtf))
+    formData.append("description", eventDesc.trim())
+    formData.append("roles", eventRoles.sort().join(","))
 
-    this.props.submitEvent(messageBody)
+    this.props.submitEvent(formData)
   }
 
   onNotification = (growlNotification) => {
@@ -228,25 +231,21 @@ export default class EventsCreate extends React.Component {
             </Col>
           </Row>
 
-          {/* <Row gutter={[5, 5]}>
+          <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_PICTURE}
             </Col>
           </Row>
           <Row gutter={[30, 30]}>
             <Col md={16} xs={24}>
-              <Button onClick={()=>this.setState({openDialog: true})}>Open Dialog</Button>
-              <DropzoneDialog
-                open={this.state.openDialog}
-                // onSave={handleImageSave}
-                acceptedFiles={["image/*"]}
-                showPreviews={true}
-                maxFileSize={5000000}
-                onClose={()=>this.setState({openDialog: false})}
+              <DropzoneArea
+                onChange={this.changePicture}
+                filesLimit={1}
+                dropzoneText="Drag and drop an image here or click"
                 showAlerts={true}
               />
             </Col>
-          </Row> */}
+          </Row>
         </Card>
 
         {/* Top Row Action Buttons - Discard, Previous, Next */}

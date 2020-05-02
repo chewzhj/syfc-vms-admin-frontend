@@ -5,9 +5,12 @@ import {
   EVENTS_MAIN_RETRIEVE_EVENT_VOL_START,
   EVENTS_MAIN_RETRIEVE_EVENT_VOL_SUCCESS,
   EVENTS_MAIN_RETRIEVE_EVENT_VOL_FAILURE,
+  EVENTS_MAIN_RETRIEVE_EVENT_PIC_START,
+  EVENTS_MAIN_RETRIEVE_EVENT_PIC_SUCCESS,
+  EVENTS_MAIN_RETRIEVE_EVENT_PIC_FAILURE,
   EVENTS_MAIN_EV_MODAL_CLOSE,
 } from '../variables/constants/EventsMainConstants'
-import { getAllEventsAPI, getVolunteersInEventAPI } from '../api/EventsAPI'
+import { getAllEventsAPI, getVolunteersInEventAPI, getEventPictureAPI } from '../api/EventsAPI'
 import moment from 'moment'
 
 function eventSortFunc(e1, e2) {
@@ -61,6 +64,7 @@ export function retrieveEventVolunteers(eventId) {
       .then(json => {
         if (json.status === 200) {
           dispatch(retrieveEventVolSuccess(json.data))
+          dispatch(retrieveEventPicture(eventId))
         } else {
           dispatch(retrieveEventVolFailure())
         }
@@ -70,7 +74,6 @@ export function retrieveEventVolunteers(eventId) {
       })
   }
 }
-
 function retrieveEventVolStart(eventId) {
   return {
     type: EVENTS_MAIN_RETRIEVE_EVENT_VOL_START,
@@ -86,6 +89,39 @@ function retrieveEventVolSuccess(value) {
 function retrieveEventVolFailure() {
   return {
     type: EVENTS_MAIN_RETRIEVE_EVENT_VOL_FAILURE,
+  }
+}
+
+function retrieveEventPicture(eventId) {
+  return function(dispatch) {
+    dispatch(retrieveEventPicStart())
+    return getEventPictureAPI(eventId)
+    .then(json => {
+      if (json.status === 200) {
+        dispatch(retrieveEventPicSuccess(json.data))
+      } else {
+        dispatch(retrieveEventPicFailure())
+      }
+    })
+    .catch(err => {
+      dispatch(retrieveEventPicFailure())
+    })
+  }
+}
+function retrieveEventPicStart() {
+  return {
+    type: EVENTS_MAIN_RETRIEVE_EVENT_PIC_START
+  }
+}
+function retrieveEventPicSuccess(value) {
+  return {
+    type: EVENTS_MAIN_RETRIEVE_EVENT_PIC_SUCCESS,
+    value
+  }
+}
+function retrieveEventPicFailure() {
+  return {
+    type: EVENTS_MAIN_RETRIEVE_EVENT_PIC_FAILURE,
   }
 }
 

@@ -3,6 +3,7 @@ import {
   EVENTS_CREATE_CHANGE_DATES,
   EVENTS_CREATE_CHANGE_DESC,
   EVENTS_CREATE_CHANGE_ROLES,
+  EVENTS_CREATE_CHANGE_PICTURE,
   EVENTS_CREATE_DISCARD,
   EVENTS_CREATE_SUBMIT_START,
   EVENTS_CREATE_SUBMIT_SUCCESS,
@@ -64,6 +65,12 @@ export function changeDesc(value) {
 export function changeRoles(value) {
   return {
     type: EVENTS_CREATE_CHANGE_ROLES,
+    value
+  }
+}
+export function changePicture(value) {
+  return {
+    type: EVENTS_CREATE_CHANGE_PICTURE,
     value
   }
 }

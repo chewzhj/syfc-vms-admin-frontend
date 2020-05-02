@@ -7,6 +7,7 @@ import {
   Button,
   Divider,
   Tooltip,
+  Spin,
   Modal,
   Typography,
 } from 'antd'
@@ -21,6 +22,7 @@ import {Link} from 'react-router-dom'
 import ReactExport from 'react-data-export'
 import EventsPhrases from '../phrases/EventsPhrases'
 import {displayDateFormat} from '../variables/DateFormats'
+import NoImage from '../assets/img/no-image.png'
 
 const { Text, Paragraph } = Typography
 const ExcelFile = ReactExport.ExcelFile
@@ -152,6 +154,8 @@ export default class EventsMain extends React.Component {
     const {
       eventsList,
       eventsLoading,
+      eventPicture,
+      eventPictureLoading,
       selectedEvent,
       eventVolList,
       eventVolLoading,
@@ -170,6 +174,24 @@ export default class EventsMain extends React.Component {
           visible={evModalVisible}>
           {evModalVisible &&
             <Row>
+
+              <Text strong>{EventsPhrases.EVENTS_PICTURE}</Text>
+              <div style={{margin: '10px auto'}}>
+                <Spin spinning={eventPictureLoading}>
+                  <div style={{height: 260}}>
+                    {eventPicture ?
+                      <img
+                        style={{maxHeight: '100%', maxWidth: '100%'}}
+                        src={eventPicture}
+                        alt={selectedEventDetails.name}
+                      />
+                      :
+                      <img src={NoImage} alt="No Image"/>
+                    }
+                  </div>
+                </Spin>
+              </div>
+
               <Col span={8}>
                 <Text strong>{EventsPhrases.EVENTS_TITLE}</Text>
               </Col>
