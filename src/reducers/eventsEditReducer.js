@@ -5,6 +5,15 @@ import {
   EVENTS_EDIT_CHANGE_DESC,
   EVENTS_EDIT_CHANGE_ROLES,
   EVENTS_EDIT_DISCARD,
+  EVENTS_EDIT_OPEN_PICTURE_DIALOG,
+  EVENTS_EDIT_CLOSE_PICTURE_DIALOG,
+  EVENTS_EDIT_GET_PICTURE_START,
+  EVENTS_EDIT_GET_PICTURE_SUCCESS,
+  EVENTS_EDIT_GET_PICTURE_FAILURE,
+  EVENTS_EDIT_CHOOSE_PICTURE,
+  EVENTS_EDIT_SET_PICTURE_START,
+  EVENTS_EDIT_SET_PICTURE_SUCCESS,
+  EVENTS_EDIT_SET_PICTURE_FAILURE,
   EVENTS_EDIT_SUBMIT_START,
   EVENTS_EDIT_SUBMIT_SUCCESS,
   EVENTS_EDIT_SUBMIT_FAILURE,
@@ -24,6 +33,11 @@ const initialState = {
   growlMessage: '',
   deleting: false,
   growlDeleting: '',
+  pictureDialogOpen: false,
+  oldPicture: null,
+  oldPictureLoading: false,
+  newPicture: [],
+  newPictureLoading: false,
 }
 
 export function eventsEditReducer(state = initialState, action) {
@@ -43,6 +57,24 @@ export function eventsEditReducer(state = initialState, action) {
       return {...state, eventDesc: action.value}
     case EVENTS_EDIT_CHANGE_ROLES:
       return {...state, eventRoles: action.value}
+    case EVENTS_EDIT_OPEN_PICTURE_DIALOG:
+      return {...state, pictureDialogOpen: true}
+    case EVENTS_EDIT_CLOSE_PICTURE_DIALOG:
+      return {...state, pictureDialogOpen: false}
+    case EVENTS_EDIT_CHOOSE_PICTURE:
+      return {...state, newPicture: action.value}
+    case EVENTS_EDIT_GET_PICTURE_START:
+      return {...state, oldPictureLoading: true}
+    case EVENTS_EDIT_GET_PICTURE_SUCCESS:
+      return {...state, oldPicture: action.value, oldPictureLoading: false}
+    case EVENTS_EDIT_GET_PICTURE_FAILURE:
+      return {...state, oldPictureLoading: false}
+    case EVENTS_EDIT_SET_PICTURE_START:
+      return {...state, newPictureLoading: true}
+    case EVENTS_EDIT_SET_PICTURE_SUCCESS:
+      return {...state, newPicture: [], newPictureLoading: false}
+    case EVENTS_EDIT_SET_PICTURE_FAILURE:
+      return {...state, newPictureLoading: false}
     case EVENTS_EDIT_SUBMIT_START:
       return {...state, submitting: true}
     case EVENTS_EDIT_SUBMIT_SUCCESS:

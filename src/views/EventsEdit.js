@@ -7,16 +7,22 @@ import {
   Card,
   Input,
   Select,
+  Typography,
   DatePicker,
   Popconfirm,
+  Spin,
+  Modal,
   notification,
 } from 'antd'
 import { yellow } from '@ant-design/colors'
 import { Redirect } from 'react-router-dom'
+import { DropzoneArea } from 'material-ui-dropzone'
 import EventsPhrases from '../phrases/EventsPhrases'
+import NoImage from '../assets/img/no-image.png'
 import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
 
 const { RangePicker } = DatePicker
+const { Text, Paragraph } = Typography
 
 export default class EventsEdit extends React.Component {
 
@@ -33,9 +39,23 @@ export default class EventsEdit extends React.Component {
   changeDates = (m, s) => this.props.changeDates(m)
   changeDesc = (e) => this.props.changeDesc(e.target.value)
   changeRoles = (value) => this.props.changeRoles(value)
+  openPictureDialog = () => {
+    this.props.openPictureDialog()
+    this.props.loadPicture(this.props.eventsEdit.originalEventDetails.id)
+  }
+  closePictureDialog = () => this.props.closePictureDialog()
+  choosePicture = value => this.props.choosePicture(value)
   discard = () => {
     this.props.discard()
     this.props.history.push('/events')
+  }
+  updatePicture = () => {
+    const {originalEventDetails, newPicture} = this.props.eventsEdit
+    if (newPicture.length === 1) {
+      const formData = new FormData()
+      formData.append("file", newPicture[0])
+      this.props.updatePicture(originalEventDetails.id, formData)
+    }
   }
   deleteEvent = () => {
     const {originalEventDetails} = this.props.eventsEdit
@@ -159,6 +179,11 @@ export default class EventsEdit extends React.Component {
       eventDates,
       eventDesc,
       eventRoles,
+      pictureDialogOpen,
+      oldPicture,
+      oldPictureLoading,
+      newPicture,
+      newPictureLoading,
       submitting,
       deleting,
     } = this.props.eventsEdit
@@ -174,6 +199,61 @@ export default class EventsEdit extends React.Component {
 
     return (
       <SideBar activeTab='events' title="Edit Event">
+
+        {/* Change Picture Modal */}
+        <Modal
+          footer={null}
+          title='Change Picture'
+          onCancel={this.closePictureDialog}
+          visible={pictureDialogOpen}>
+
+          <Row>
+            <Col span={24}>
+              <Text strong>{EventsPhrases.EVENTS_PICTURE}</Text>
+            </Col>
+
+            <div style={{margin: '10px auto'}}>
+              <Spin spinning={oldPictureLoading}>
+                <div style={{height: 260}}>
+                  {oldPicture ?
+                    <img
+                      style={{maxHeight: '100%', maxWidth: '100%'}}
+                      src={oldPicture}
+                      alt={originalEventDetails.eventTitle}
+                    />
+                    :
+                    <img src={NoImage} alt="No Image"/>
+                  }
+                </div>
+              </Spin>
+            </div>
+
+            <Col span={24}>
+              <DropzoneArea
+                onChange={this.choosePicture}
+                filesLimit={1}
+                dropzoneText="Drag and drop an image here or click"
+                showAlerts={true}
+              />
+            </Col>
+          </Row>
+
+          <Row justify="end">
+            <Col span={24}>
+              <Paragraph>
+                The picture will be updated even if you choose to discard the overall change to the event.
+              </Paragraph>
+            </Col>
+            <Button
+              primary
+              onClick={this.updatePicture}
+              loading={newPictureLoading}
+              disabled={newPicture.length !== 1}>
+              Update Picture
+            </Button>
+          </Row>
+        </Modal>
+
         <Row justify="start">
           {/* Safety Check for Delete */}
           <Popconfirm
@@ -260,6 +340,17 @@ export default class EventsEdit extends React.Component {
                 onChange={this.changeRoles}
                 value={eventRoles}
               />
+            </Col>
+          </Row>
+
+          <Row gutter={[5, 5]}>
+            <Col md={20} xs={24}>
+              {EventsPhrases.EVENTS_PICTURE}
+            </Col>
+            <Col>
+              <Button onClick={this.openPictureDialog}>
+                Set Event Picture
+              </Button>
             </Col>
           </Row>
         </Card>

@@ -174,23 +174,27 @@ export default class EventsMain extends React.Component {
           visible={evModalVisible}>
           {evModalVisible &&
             <Row>
+              <Col span={24}>
+                <Text strong>{EventsPhrases.EVENTS_PICTURE}</Text>
+              </Col>
 
-              <Text strong>{EventsPhrases.EVENTS_PICTURE}</Text>
-              <div style={{margin: '10px auto'}}>
-                <Spin spinning={eventPictureLoading}>
-                  <div style={{height: 260}}>
-                    {eventPicture ?
-                      <img
-                        style={{maxHeight: '100%', maxWidth: '100%'}}
-                        src={eventPicture}
-                        alt={selectedEventDetails.name}
-                      />
-                      :
-                      <img src={NoImage} alt="No Image"/>
-                    }
-                  </div>
-                </Spin>
-              </div>
+              <Col span={24}>
+                <Row justify='center'>
+                  <Spin spinning={eventPictureLoading}>
+                    <div style={{height: 260}}>
+                      {eventPicture ?
+                        <img
+                          style={{maxHeight: '100%', maxWidth: '100%'}}
+                          src={eventPicture}
+                          alt={selectedEventDetails.name}
+                        />
+                        :
+                        <img src={NoImage} alt="No Image"/>
+                      }
+                    </div>
+                  </Spin>
+                </Row>
+              </Col>
 
               <Col span={8}>
                 <Text strong>{EventsPhrases.EVENTS_TITLE}</Text>

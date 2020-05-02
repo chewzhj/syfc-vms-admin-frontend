@@ -85,10 +85,24 @@ export async function postJoinEventAPI(eventId, role) {
 export async function getEventPictureAPI(eventId) {
   try {
     let data = await axios.get(`${baseURL}eventAPI/getEventPic/${eventId}`)
-    console.log(data);
     return data
   } catch (e) {
-    console.log(e);
+    return e;
+  }
+}
+
+export async function postUpdateEventPictureAPI(eventId, picture) {
+  try {
+    let data = await axios.post(`${baseURL}eventAPI/uploadNewEventPic/${eventId}`,
+      picture,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
+    )
+    return data
+  } catch (e) {
     return e;
   }
 }

@@ -5,6 +5,15 @@ import {
   EVENTS_EDIT_CHANGE_DESC,
   EVENTS_EDIT_CHANGE_ROLES,
   EVENTS_EDIT_DISCARD,
+  EVENTS_EDIT_OPEN_PICTURE_DIALOG,
+  EVENTS_EDIT_CLOSE_PICTURE_DIALOG,
+  EVENTS_EDIT_GET_PICTURE_START,
+  EVENTS_EDIT_GET_PICTURE_SUCCESS,
+  EVENTS_EDIT_GET_PICTURE_FAILURE,
+  EVENTS_EDIT_CHOOSE_PICTURE,
+  EVENTS_EDIT_SET_PICTURE_START,
+  EVENTS_EDIT_SET_PICTURE_SUCCESS,
+  EVENTS_EDIT_SET_PICTURE_FAILURE,
   EVENTS_EDIT_SUBMIT_START,
   EVENTS_EDIT_SUBMIT_SUCCESS,
   EVENTS_EDIT_SUBMIT_FAILURE,
@@ -16,6 +25,8 @@ import {
 import {
   postUpdateEventAPI,
   deleteEventAPI,
+  getEventPictureAPI,
+  postUpdateEventPictureAPI,
 } from '../api/EventsAPI'
 
 export function editEvent(eventId, eventObject) {
@@ -82,6 +93,72 @@ function deleteEventFailure() {
   }
 }
 
+export function loadPicture(eventId) {
+  return function(dispatch) {
+    dispatch(loadPictureStart())
+    return getEventPictureAPI(eventId)
+      .then(json => {
+        if (json.status === 200) {
+          dispatch(loadPictureSuccess(json.data))
+        } else {
+          dispatch(loadPictureFailure())
+        }
+      })
+      .catch(err => {
+        dispatch(loadPictureFailure())
+      })
+  }
+}
+function loadPictureStart() {
+  return {
+    type: EVENTS_EDIT_GET_PICTURE_START
+  }
+}
+function loadPictureSuccess(picture) {
+  return {
+    type: EVENTS_EDIT_GET_PICTURE_SUCCESS,
+    value: picture
+  }
+}
+function loadPictureFailure() {
+  return {
+    type: EVENTS_EDIT_GET_PICTURE_FAILURE
+  }
+}
+
+export function updatePicture(eventId, pictureForm) {
+  return function(dispatch) {
+    dispatch(updatePictureStart())
+    return postUpdateEventPictureAPI(eventId, pictureForm)
+      .then(json => {
+        if (json.status === 200) {
+          dispatch(updatePictureSuccess())
+          dispatch(loadPicture(eventId))
+        } else {
+          dispatch(updatePictureFailure())
+        }
+      })
+      .catch(err => {
+        dispatch(updatePictureFailure())
+      })
+  }
+}
+function updatePictureStart() {
+  return {
+    type: EVENTS_EDIT_SET_PICTURE_START
+  }
+}
+function updatePictureSuccess() {
+  return {
+    type: EVENTS_EDIT_SET_PICTURE_SUCCESS
+  }
+}
+function updatePictureFailure() {
+  return {
+    type: EVENTS_EDIT_SET_PICTURE_FAILURE
+  }
+}
+
 export function loadEvent(value) {
   return {
     type: EVENTS_EDIT_LOAD_EVENT,
@@ -110,6 +187,22 @@ export function changeRoles(value) {
   return {
     type: EVENTS_EDIT_CHANGE_ROLES,
     value
+  }
+}
+export function openPictureDialog() {
+  return {
+    type: EVENTS_EDIT_OPEN_PICTURE_DIALOG
+  }
+}
+export function closePictureDialog() {
+  return {
+    type: EVENTS_EDIT_CLOSE_PICTURE_DIALOG
+  }
+}
+export function choosePicture(picture) {
+  return {
+    type: EVENTS_EDIT_CHOOSE_PICTURE,
+    value: picture
   }
 }
 export function discard() {
