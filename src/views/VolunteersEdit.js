@@ -16,6 +16,7 @@ import {Redirect} from 'react-router-dom'
 import VolunteersPhrases from '../phrases/VolunteersPhrases'
 import {internalDateFormat, displayDateFormat} from '../variables/DateFormats'
 import {deptOptions} from '../variables/DepartmentOptions'
+import {checkVolFields, errorMessages} from '../variables/volunteerCheckFunctions'
 
 const {Option} = Select
 
@@ -58,59 +59,39 @@ export default class VolunteersEdit extends React.Component {
       number,
     } = this.props.volunteersEdit
 
-    const checks = (new Array(11)).fill(false)
-    if (name.trim() !== '') {
-      checks[0] = true
-    }
-    if (email.trim() !== '') {
-      checks[1] = true
-    }
-    checks[2] = true // no check for password
-
-    if (dob !== null) {
-      checks[3] = true
-    }
-    if (nric.trim() !== '') {
-      checks[4] = true
-    }
-    if (address.trim() !== '') {
-      checks[5] = true
-    }
-    if (postal.trim() !== '') {
-      checks[6] = true
-    }
-    if (church.trim() !== '') {
-      checks[7] = true
-    }
-    if (dept.trim() !== '') {
-      checks[8] = true
-    }
-    if (gender === 'M' || gender === 'F') {
-      checks[9] = true
-    }
-    if (number.trim() !== '') {
-      checks[10] = true
-    }
-
-    return checks
+    return checkVolFields(
+      name,
+      email,
+      null,
+      dob,
+      nric,
+      address,
+      postal,
+      church,
+      dept,
+      gender,
+      number,
+      false
+    )
   }
   clickSubmit = () => {
     const checks = this.checkFields()
     let i = 0
     const outputs = []
-    const errorMessages = [
-      'Name is empty',
-      'Email is empty',
-      'Password is empty',
-      'Date of Birth is empty',
-      'NRIC is empty',
-      'Address is empty',
-      'Postal is empty',
-      'Church is empty',
-      'Department is empty',
-      'Gender is invalid',
-      'Phone Number is empty',
-    ]
+    // const errorMessages = [
+    //   'Name is empty',
+    //   'Email is empty',
+    //   'Password is empty',
+    //   'Date of Birth is empty',
+    //   'NRIC is empty',
+    //   'Address is empty',
+    //   'Postal is empty',
+    //   'Church is empty',
+    //   'Department is empty',
+    //   'Gender is invalid',
+    //   'Phone Number is empty',
+    //   'NRIC is invalid'
+    // ]
     for (const idx in errorMessages) {
       if (!checks[idx]) {
         outputs.push(`${++i}. ${errorMessages[idx]}`)
