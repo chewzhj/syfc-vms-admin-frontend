@@ -222,7 +222,7 @@ export default class EventsEdit extends React.Component {
                       alt={originalEventDetails.eventTitle}
                     />
                     :
-                    <img src={NoImage} alt="No Image"/>
+                    <img src={NoImage} alt={originalEventDetails.eventTitle}/>
                   }
                 </div>
               </Spin>

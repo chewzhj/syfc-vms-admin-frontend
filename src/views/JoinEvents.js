@@ -32,8 +32,7 @@ const formatDate = (rawString) => {
 export default class JoinEvents extends React.Component {
 
   componentDidMount() {
-    this.props.getMyEvents()
-    this.props.retrieveEvents()
+    this.props.getAvailableEvents()
   }
   componentDidUpdate() {
     const {growlMessage} = this.props.joinEvents
@@ -83,30 +82,10 @@ export default class JoinEvents extends React.Component {
       this.props.history.push('/events')
     }
   }
-  generateAvailableUnjoinedEvents = () => {
-    const {myEventsList} = this.props.myEvents
-    const {eventsList} = this.props.eventsMain
-
-    const availableEvents = []
-    const dayBefore = moment().subtract(1, 'days').startOf('day')
-
-    for (const event of eventsList) {
-      const contains = myEventsList.filter(myEvent => myEvent.id === event.id)
-      if (contains.length === 0) {
-        const startMoment = moment(event.start_date)
-        if (startMoment.isAfter(dayBefore)) {
-          availableEvents.push(event)
-        }
-      }
-    }
-
-    return availableEvents
-  }
   filterEvent = () => {
-    const {eventsList} = this.props.eventsMain
-    const {viewEvent} = this.props.joinEvents
+    const {availableEvents, viewEvent} = this.props.joinEvents
 
-    const filtered = eventsList.filter(evt => evt.id === viewEvent)
+    const filtered = availableEvents.filter(evt => evt.id === viewEvent)
 
     if (filtered.length === 1) {
       return filtered[0]
@@ -116,10 +95,13 @@ export default class JoinEvents extends React.Component {
   }
 
   render() {
-    const { myEventsLoading } = this.props.myEvents
-    const { eventsLoading } = this.props.eventsMain
-    const { viewEventVisible, joining, role } = this.props.joinEvents
-    const availableEvents = this.generateAvailableUnjoinedEvents()
+    const {
+      availableEvents,
+      availableEventsLoading,
+      viewEventVisible,
+      joining,
+      role,
+    } = this.props.joinEvents
     const viewEvent = this.filterEvent()
 
     return (
@@ -133,6 +115,24 @@ export default class JoinEvents extends React.Component {
           <Skeleton loading={!viewEventVisible}>
             {viewEvent!==null &&
               <Row>
+                <Col span={24}>
+                  <Text strong>{EventsPhrases.EVENTS_PICTURE}</Text>
+                </Col>
+                <Col span={24}>
+                  {viewEvent.picture ?
+                    <Row justify='center'>
+                      <div style={{height: 260}}>
+                        <img
+                          style={{maxHeight: '100%', maxWidth: '100%'}}
+                          src={viewEvent.picture}
+                          alt={viewEvent.name}
+                        />
+                      </div>
+                    </Row>
+                    :
+                    <Paragraph ellipsis>No Image</Paragraph>
+                  }
+                </Col>
                 <Col span={24}>
                   <Text strong>{EventsPhrases.EVENTS_TITLE}</Text>
                 </Col>
@@ -176,37 +176,13 @@ export default class JoinEvents extends React.Component {
                     </Button>
                   </Card>
                 </Col>
-                {/* <Col span={24}>
-                  <Text strong>{EventsPhrases.CHOOSE_EVENTS_ROLE}</Text>
-                </Col>
-                <Col span={24}>
-                  <Select
-                    placeholder={EventsPhrases.CHOOSE_EVENTS_ROLE}
-                    value={role}
-                    onChange={this.changeRole}
-                    style={{width: '100%', margin: '4px 0'}}>
-                    {viewEvent.roles.split(",").map(r => (
-                      <Option key={r} value={r}>
-                        {r}
-                      </Option>
-                    ))}
-                  </Select>
-                </Col>
-
-                <Button
-                  type='primary'
-                  loading={joining}
-                  style={{width: '100%', marginTop: 24}}
-                  onClick={this.joinEvent}>
-                  Join Event
-                </Button> */}
               </Row>
             }
           </Skeleton>
         </Modal>
 
         {/* Available Events */}
-        <Spin spinning={myEventsLoading && eventsLoading}>
+        <Spin spinning={availableEventsLoading}>
           <Row gutter={[12, 12]} style={{minHeight: 100}}>
             <Col span={24} style={{textAlign: 'center'}}>
               {availableEvents.length === 0 &&
@@ -221,6 +197,8 @@ export default class JoinEvents extends React.Component {
               <Col key={evt.id} lg={6} sm={8} xs={12}>
                 <EventCard
                   name={evt.name}
+                  picture={evt.picture}
+                  pictureLoading={evt.pictureLoading}
                   startDate={formatDate(evt.start_date)}
                   endDate={formatDate(evt.end_date)}
                   onClick={()=>this.viewEvent(evt.id)}

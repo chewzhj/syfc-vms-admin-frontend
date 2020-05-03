@@ -65,6 +65,24 @@ export default class MyEvents extends React.Component {
             {viewEvent!==null &&
               <Row>
                 <Col span={24}>
+                  <Text strong>{EventsPhrases.EVENTS_PICTURE}</Text>
+                </Col>
+                <Col span={24}>
+                  {viewEvent.picture ?
+                    <Row justify='center'>
+                      <div style={{height: 260}}>
+                        <img
+                          style={{maxHeight: '100%', maxWidth: '100%'}}
+                          src={viewEvent.picture}
+                          alt={viewEvent.name}
+                        />
+                      </div>
+                    </Row>
+                    :
+                    <Paragraph ellipsis>No Image</Paragraph>
+                  }
+                </Col>
+                <Col span={24}>
                   <Text strong>{EventsPhrases.EVENTS_TITLE}</Text>
                 </Col>
                 <Col span={24}>
@@ -112,6 +130,8 @@ export default class MyEvents extends React.Component {
               <Col key={evt.id} lg={6} sm={8} xs={12}>
                 <EventCard
                   name={evt.name}
+                  picture={evt.picture}
+                  pictureLoading={evt.pictureLoading}
                   startDate={formatDate(evt.start_date)}
                   endDate={formatDate(evt.end_date)}
                   onClick={()=>this.viewEvent(evt.id)}

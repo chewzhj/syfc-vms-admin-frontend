@@ -1,8 +1,7 @@
 import {connect} from 'react-redux'
 import View from '../views/JoinEvents'
-import { getMyEvents } from '../actions/myEventsActions'
-import { retrieveEvents } from '../actions/eventsMainActions'
 import {
+  getAvailableEventsWithPicture,
   joinEvent,
   viewEvent,
   changeRole,
@@ -12,13 +11,10 @@ import {
 
 const mapStateToProps = state => ({
   joinEvents: state.joinEvents,
-  myEvents: state.myEvents,
-  eventsMain: state.eventsMain,
 })
 
 const mapDispatchToProps = dispatch => ({
-  getMyEvents: () => dispatch(getMyEvents()),
-  retrieveEvents: () => dispatch(retrieveEvents()),
+  getAvailableEvents: () => dispatch(getAvailableEventsWithPicture()),
   joinEvent: (eventId, role) => dispatch(joinEvent(eventId, role)),
   viewEvent: (value) => dispatch(viewEvent(value)),
   changeRole: (value) => dispatch(changeRole(value)),

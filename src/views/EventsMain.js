@@ -189,7 +189,7 @@ export default class EventsMain extends React.Component {
                           alt={selectedEventDetails.name}
                         />
                         :
-                        <img src={NoImage} alt="No Image"/>
+                        <img src={NoImage} alt={selectedEventDetails.name}/>
                       }
                     </div>
                   </Spin>

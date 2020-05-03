@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import View from '../views/MyEvents'
 import {
-  getMyEvents,
+  getMyEventsWithPicture,
   viewEvent,
   closeView,
 } from '../actions/myEventsActions'
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getMyEvents: () => dispatch(getMyEvents()),
+  getMyEvents: () => dispatch(getMyEventsWithPicture()),
   viewEvent: (value) => dispatch(viewEvent(value)),
   closeView: () => dispatch(closeView()),
 })

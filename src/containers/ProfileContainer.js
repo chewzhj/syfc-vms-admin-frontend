@@ -3,7 +3,7 @@ import View from '../views/Profile'
 import {
   getProfile,
 } from '../actions/profileActions'
-import {getMyEvents} from '../actions/myEventsActions'
+import {getMyEventsWithPicture} from '../actions/myEventsActions'
 import {loadVolunteer} from '../actions/profileEditActions'
 
 const mapStateToProps = state => ({
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getMyEvents: () => dispatch(getMyEvents()),
+  getMyEvents: () => dispatch(getMyEventsWithPicture()),
   getProfile: () => dispatch(getProfile()),
   loadVolunteer: (value) => dispatch(loadVolunteer(value)),
 })
