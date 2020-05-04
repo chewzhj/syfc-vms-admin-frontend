@@ -20,6 +20,7 @@ const {Title} = Typography
 
 export default class LoginVolunteer extends React.Component {
 
+  // listener for notifications
   componentDidUpdate() {
     const {growlMessage} = this.props.loginVolunteer
     if (growlMessage) {
@@ -27,6 +28,7 @@ export default class LoginVolunteer extends React.Component {
     }
   }
 
+  // state changes
   changeEmail = (e) => this.props.changeEmail(e.target.value)
   changePassword = (e) => this.props.changePassword(e.target.value)
   back = (e) => {
@@ -48,7 +50,7 @@ export default class LoginVolunteer extends React.Component {
       this.props.volunteerLogin(volunteerLoginObject)
     }
   }
-
+  // notification handler
   onNotification = (growlNotification) => {
     const alerts = {
       success: {

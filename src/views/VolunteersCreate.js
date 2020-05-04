@@ -21,6 +21,7 @@ const {Option} = Select
 
 export default class VolunteersCreate extends React.Component {
 
+  // render the notif after submission
   componentDidUpdate() {
     const {growlMessage} = this.props.volunteersCreate
     if (growlMessage) {
@@ -28,6 +29,7 @@ export default class VolunteersCreate extends React.Component {
     }
   }
 
+  // functions for changing fields
   changeName = (e) => this.props.changeName(e.target.value)
   changeEmail = (e) => this.props.changeEmail(e.target.value)
   changePassword = (e) => this.props.changePassword(e.target.value)
@@ -45,6 +47,7 @@ export default class VolunteersCreate extends React.Component {
     this.props.history.push('/volunteers')
   }
 
+  // field checking functions, see volunteerCheckFunctions
   checkFields = () => {
     const {
       name,
@@ -140,7 +143,7 @@ export default class VolunteersCreate extends React.Component {
 
     this.props.createVolunteer(messageBody)
   }
-
+  // sets behavious for notifs
   onNotification = (growlNotification) => {
     const alerts = {
       success: {

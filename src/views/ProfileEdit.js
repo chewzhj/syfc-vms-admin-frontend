@@ -22,6 +22,7 @@ const {Option} = Select
 
 export default class ProfileEdit extends React.Component {
 
+  // render the notif after submission
   componentDidUpdate() {
     const {growlMessage} = this.props.profileEdit
     if (growlMessage) {
@@ -29,6 +30,7 @@ export default class ProfileEdit extends React.Component {
     }
   }
 
+  // functions for changing fields
   changeName = (e) => this.props.changeName(e.target.value)
   changeEmail = (e) => this.props.changeEmail(e.target.value)
   changePassword = (e) => this.props.changePassword(e.target.value)
@@ -46,6 +48,7 @@ export default class ProfileEdit extends React.Component {
     this.props.history.push('/profile')
   }
 
+  // field checking functions, see volunteerCheckFunctions
   checkFields = () => {
     const {
       name,
@@ -140,7 +143,7 @@ export default class ProfileEdit extends React.Component {
 
     this.props.editVolunteer(originalVolDetails.id, messageBody)
   }
-
+  // sets behavious for notifs
   onNotification = (growlNotification) => {
     const alerts = {
       success: {
@@ -181,7 +184,7 @@ export default class ProfileEdit extends React.Component {
       number,
       submitting,
     } = this.props.profileEdit
-    if (!originalVolDetails.id) {
+    if (!originalVolDetails.id) { // redirects to profile if user entered page by URL
       return <Redirect to='/profile' />
     }
     const nameChanged = name !== originalVolDetails.name
@@ -357,7 +360,7 @@ export default class ProfileEdit extends React.Component {
           </Row>
         </Card>
 
-        {/* Top Row Action Buttons - Discard, Previous, Next */}
+        {/* Button bar */}
         <Row justify="space-between">
           {/* Discard button */}
           <Col lg={6} md={6} sm={12} xs={24} style={{ marginTop: 10 }}>
@@ -366,7 +369,7 @@ export default class ProfileEdit extends React.Component {
               </Button>
           </Col>
 
-          {/* Previous and Next Buttons for Stepper - Visibility */}
+          {/* Submit Button */}
           <Col lg={12} md={12} sm={12} xs={24} style={{ marginTop: 10 }}>
             <Button
               onClick={this.clickSubmit}

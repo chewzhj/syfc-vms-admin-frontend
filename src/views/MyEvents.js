@@ -26,13 +26,15 @@ const formatDate = (rawString) => {
 
 export default class MyEvents extends React.Component {
 
+  // api call at the start
   componentDidMount() {
     this.props.getMyEvents()
   }
 
+  // onclick actions and state changes
   viewEvent = (id) => this.props.viewEvent(id)
   closeView = () => this.props.closeView()
-
+  // processing for viewing event
   filterEvent = () => {
     const {myEventsList, viewEvent} = this.props.myEvents
 
@@ -56,6 +58,7 @@ export default class MyEvents extends React.Component {
     return (
       <SideBar activeTab='events' title="My Events" padding={8}>
 
+        {/* View Event Modal */}
         <Modal
           visible={viewEventVisible}
           title='View Event'

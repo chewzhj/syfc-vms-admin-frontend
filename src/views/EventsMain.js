@@ -40,12 +40,14 @@ const formatDate = (rawString) => {
 
 export default class EventsMain extends React.Component {
 
+  // api call at the start to retrieve events
   componentDidMount() {
     this.props.retrieveEvents()
   }
 
   closeEventVolModal = () => this.props.closeEventVolModal()
 
+  // table columns for events table
   columns = [
     {
       title: 'Name',
@@ -123,7 +125,7 @@ export default class EventsMain extends React.Component {
 
     this.props.retrieveEventVolunteers(eventId)
   }
-
+  // table columns for volunteer list in view event
   modalTableColumns = [
     {
       title: 'Name',
@@ -139,7 +141,7 @@ export default class EventsMain extends React.Component {
       render: (text, record, index) => formatDate(text),
     },
   ]
-
+  // data processing to filter an event when clicked
   filterEVModal = (eventsList, selectedEvent) => {
     const filtered = eventsList.filter(evt => evt.id === selectedEvent)
 
@@ -243,6 +245,7 @@ export default class EventsMain extends React.Component {
             </Button>
           </Link>
         </Row>
+        {/* Events Table */}
         <Table
           dataSource={eventsList}
           loading={eventsLoading}
@@ -256,6 +259,7 @@ export default class EventsMain extends React.Component {
   }
 }
 
+// Excel Exporting Component
 const ExcelExport = (props) => {
   const exportDataset = props.eventVolList.map(vol => ({
     name: vol.full_name,

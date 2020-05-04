@@ -26,6 +26,7 @@ const { Text, Paragraph } = Typography
 
 export default class EventsEdit extends React.Component {
 
+  // notifications listener
   componentDidUpdate() {
     const {growlMessage, growlDeleting} = this.props.eventsEdit
     if (growlMessage) {
@@ -34,7 +35,7 @@ export default class EventsEdit extends React.Component {
       this.onNotification(growlDeleting, true)
     }
   }
-
+  // state change functions
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
   changeDesc = (e) => this.props.changeDesc(e.target.value)
@@ -61,7 +62,7 @@ export default class EventsEdit extends React.Component {
     const {originalEventDetails} = this.props.eventsEdit
     this.props.deleteEvent(originalEventDetails.id)
   }
-
+  // submission check and process functions
   checkFields = () => {
     const {
       eventTitle,
@@ -146,7 +147,7 @@ export default class EventsEdit extends React.Component {
 
     this.props.editEvent(originalEventDetails.id, messageBody)
   }
-
+  // notification handler
   onNotification = (growlNotification, isDeleting) => {
     const alerts = {
       success: {
@@ -187,11 +188,11 @@ export default class EventsEdit extends React.Component {
       submitting,
       deleting,
     } = this.props.eventsEdit
-
+    // check to redirect if user enters this page by url
     if (!originalEventDetails.id) {
       return <Redirect to='/events' />
     }
-
+    // checks for whether each field was changed
     const titleChanged = eventTitle !== originalEventDetails.eventTitle
     const datesChanged = eventDates !== originalEventDetails.eventDates
     const descChanged = eventDesc !== originalEventDetails.eventDesc
@@ -274,6 +275,7 @@ export default class EventsEdit extends React.Component {
 
         <Card>
 
+          {/* Events Title */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_TITLE}
@@ -290,6 +292,7 @@ export default class EventsEdit extends React.Component {
             </Col>
           </Row>
 
+          {/* Events Dates */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_DATES}
@@ -306,6 +309,7 @@ export default class EventsEdit extends React.Component {
             </Col>
           </Row>
 
+          {/* Events Description */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_DESCRIPTION}
@@ -323,6 +327,7 @@ export default class EventsEdit extends React.Component {
             </Col>
           </Row>
 
+          {/* Events Roles */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.SET_EVENTS_ROLES}
@@ -343,6 +348,7 @@ export default class EventsEdit extends React.Component {
             </Col>
           </Row>
 
+          {/* Event Picture - button to open dialog */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_PICTURE}
@@ -355,7 +361,7 @@ export default class EventsEdit extends React.Component {
           </Row>
         </Card>
 
-        {/* Top Row Action Buttons - Discard, Previous, Next */}
+        {/* Button Bar */}
         <Row justify="space-between">
           {/* Discard button */}
           <Col lg={6} md={6} sm={24} xs={24} style={{ marginTop: 10 }}>
@@ -364,7 +370,7 @@ export default class EventsEdit extends React.Component {
             </Button>
           </Col>
 
-          {/* Previous and Next Buttons for Stepper - Visibility */}
+          {/* Submit Button */}
           <Col lg={18} md={18} sm={24} xs={24} style={{ marginTop: 10 }}>
             <Button
               onClick={this.clickSubmit}

@@ -5,6 +5,7 @@ import NoImage from '../assets/img/no-image.png'
 
 const {Text} = Typography
 
+// this component is used for MyEvents and JoinEvents, as a card representing an event
 const EventCard = (props) => {
   return (
     <Card

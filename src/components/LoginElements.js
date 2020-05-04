@@ -2,6 +2,7 @@ import React from 'react'
 import LoginPhrases from '../phrases/LoginPhrases'
 import Full_Logo from '../assets/img/syfc-full-logo.png'
 
+// this is the layout page for the pages before logging in
 const LoginElements = (props) => {
   return (
     <div style={{width: '100%'}}>

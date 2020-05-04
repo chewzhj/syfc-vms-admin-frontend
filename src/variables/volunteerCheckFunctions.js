@@ -1,4 +1,4 @@
-
+// nric check function
 function checkNRIC(nric) {
   let isLegit = false;
   const nricWeight = [2, 7, 6, 5, 4, 3, 2];
@@ -30,6 +30,7 @@ function checkNRIC(nric) {
   }
   return isLegit;
 }
+// function used in creating/updating volunteers to check the fields
 export function checkVolFields(
   name,
   email,

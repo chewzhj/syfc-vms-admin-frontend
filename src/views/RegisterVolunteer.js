@@ -24,6 +24,7 @@ const {Title} = Typography
 
 export default class RegisterVolunteer extends React.Component {
 
+  // render the notif after submission
   componentDidUpdate() {
     const {growlMessage} = this.props.registerVolunteer
     if (growlMessage) {
@@ -31,6 +32,7 @@ export default class RegisterVolunteer extends React.Component {
     }
   }
 
+  // functions for changing fields
   changeName = (e) => this.props.changeName(e.target.value)
   changeEmail = (e) => this.props.changeEmail(e.target.value)
   changePassword = (e) => this.props.changePassword(e.target.value)
@@ -49,6 +51,7 @@ export default class RegisterVolunteer extends React.Component {
     this.props.history.push('/login')
   }
 
+  // field checking functions, see volunteerCheckFunctions
   checkFields = () => {
     const {
       name,
@@ -144,7 +147,7 @@ export default class RegisterVolunteer extends React.Component {
 
     this.props.createVolunteer(messageBody)
   }
-
+  // sets behavious for notifs
   onNotification = (growlNotification) => {
     if (growlNotification === 'success') {
       this.props.history.push('/login/volunteer')
@@ -369,11 +372,9 @@ export default class RegisterVolunteer extends React.Component {
           </Col>
         </Row>
 
-        {/* Top Row Action Buttons - Discard, Previous, Next */}
+        {/* Button Bar */}
         <Row style={{ marginTop: 24 }}>
-          {/* Discard button */}
-
-          {/* Previous and Next Buttons for Stepper - Visibility */}
+          {/* Submit Button */}
           <Col xs={24}>
             <Button
               onClick={this.clickSubmit}

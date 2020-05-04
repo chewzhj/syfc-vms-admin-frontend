@@ -31,9 +31,11 @@ const formatDate = (rawString) => {
 
 export default class JoinEvents extends React.Component {
 
+  // api call at the start
   componentDidMount() {
     this.props.getAvailableEvents()
   }
+  // listener for notifications
   componentDidUpdate() {
     const {growlMessage} = this.props.joinEvents
     if (growlMessage) {
@@ -41,6 +43,7 @@ export default class JoinEvents extends React.Component {
     }
   }
 
+  // onClick actions and state changes
   viewEvent = (id) => this.props.viewEvent(id)
   changeRole = (value) => this.props.changeRole(value)
   closeView = () => this.props.closeView()
@@ -56,7 +59,7 @@ export default class JoinEvents extends React.Component {
       this.props.joinEvent(viewEvent, role)
     }
   }
-
+  // notification handler
   onNotification = (growlNotification) => {
     const alerts = {
       success: {
@@ -82,6 +85,7 @@ export default class JoinEvents extends React.Component {
       this.props.history.push('/events')
     }
   }
+  // processing of event upon click
   filterEvent = () => {
     const {availableEvents, viewEvent} = this.props.joinEvents
 
@@ -107,6 +111,7 @@ export default class JoinEvents extends React.Component {
     return (
       <SideBar activeTab='joinevents' title="Join Events" padding={8}>
 
+        {/* View Event Modal */}
         <Modal
           visible={viewEventVisible}
           title='View Event'

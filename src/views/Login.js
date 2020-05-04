@@ -5,6 +5,7 @@ import {
 import {Link} from 'react-router-dom'
 import LoginElements from '../components/LoginElements'
 
+// main page with 3 redirect buttons
 export default class Login extends React.Component {
 
   render() {

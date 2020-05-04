@@ -30,7 +30,7 @@ const formatDate = (rawString) => {
   const momentObj = moment(rawString)
   return momentObj.format(displayDateFormat)
 }
-
+// participation badges
 const badges = [
   {src: badge3, alt: 'Attended 3 Events', count: 3},
   {src: badge5, alt: 'Attended 5 Events', count: 5},
@@ -53,11 +53,13 @@ const labels = [
 
 export default class Profile extends React.Component {
 
+  // api calls at the start
   componentDidMount() {
     this.props.getProfile()
     this.props.getMyEvents()
   }
 
+  // participation badges counting function
   countParticipationBadges = () => {
     const {myEventsList} = this.props.myEvents
 
@@ -70,6 +72,8 @@ export default class Profile extends React.Component {
     })
     return badges.filter(badge => badge.count <= count)
   }
+
+  // processing data
   processValues = (profileObject) => {
     if (profileObject) {
       const values = [

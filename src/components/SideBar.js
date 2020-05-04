@@ -14,6 +14,8 @@ import { Link } from 'react-router-dom'
 const { Header, Content, Footer, Sider } = Layout;
 // const { SubMenu } = Menu
 
+// this sidebar is used for navigation around the staff/volunteer portals and for Logout
+// this sidebar is used in all pages after logging in
 export default class SideBar extends React.Component {
 
   state = {

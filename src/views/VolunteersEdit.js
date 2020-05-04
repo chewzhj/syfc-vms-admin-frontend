@@ -22,6 +22,7 @@ const {Option} = Select
 
 export default class VolunteersEdit extends React.Component {
 
+  // render the notif after submission
   componentDidUpdate() {
     const {growlMessage} = this.props.volunteersEdit
     if (growlMessage) {
@@ -29,6 +30,7 @@ export default class VolunteersEdit extends React.Component {
     }
   }
 
+  // functions for changing fields
   changeName = (e) => this.props.changeName(e.target.value)
   changeEmail = (e) => this.props.changeEmail(e.target.value)
   changeDob = (m, s) => this.props.changeDob(m)
@@ -45,6 +47,7 @@ export default class VolunteersEdit extends React.Component {
     this.props.history.push('/volunteers')
   }
 
+  // field checking functions, see volunteerCheckFunctions
   checkFields = () => {
     const {
       name,
@@ -78,20 +81,6 @@ export default class VolunteersEdit extends React.Component {
     const checks = this.checkFields()
     let i = 0
     const outputs = []
-    // const errorMessages = [
-    //   'Name is empty',
-    //   'Email is empty',
-    //   'Password is empty',
-    //   'Date of Birth is empty',
-    //   'NRIC is empty',
-    //   'Address is empty',
-    //   'Postal is empty',
-    //   'Church is empty',
-    //   'Department is empty',
-    //   'Gender is invalid',
-    //   'Phone Number is empty',
-    //   'NRIC is invalid'
-    // ]
     for (const idx in errorMessages) {
       if (!checks[idx]) {
         outputs.push(`${++i}. ${errorMessages[idx]}`)
@@ -153,7 +142,7 @@ export default class VolunteersEdit extends React.Component {
 
     this.props.editVolunteer(originalVolDetails.id, messageBody)
   }
-
+  // sets behavious for notifs
   onNotification = (growlNotification) => {
     const alerts = {
       success: {
@@ -370,7 +359,7 @@ export default class VolunteersEdit extends React.Component {
           </Row>
         </Card>
 
-        {/* Top Row Action Buttons - Discard, Previous, Next */}
+        {/* Button Bar */}
         <Row justify="space-between">
           {/* Discard button */}
           <Col lg={6} md={6} sm={12} xs={24} style={{ marginTop: 10 }}>
@@ -379,7 +368,7 @@ export default class VolunteersEdit extends React.Component {
               </Button>
           </Col>
 
-          {/* Previous and Next Buttons for Stepper - Visibility */}
+          {/* Submit Button */}
           <Col lg={12} md={12} sm={12} xs={24} style={{ marginTop: 10 }}>
             <Button
               onClick={this.clickSubmit}

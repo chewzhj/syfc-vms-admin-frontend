@@ -19,15 +19,14 @@ const { Option } = Select
 
 export default class EventsCreate extends React.Component {
 
+  // function that waits for state updates
   componentDidUpdate() {
     const {growlMessage} = this.props.eventsCreate
     if (growlMessage) {
       this.onNotification(growlMessage)
     }
   }
-  state = {
-    openDialog: false
-  }
+  // field updates
   changePicture = (files) => this.props.changePicture(files)
   changeTitle = (e) => this.props.changeTitle(e.target.value)
   changeDates = (m, s) => this.props.changeDates(m)
@@ -37,7 +36,7 @@ export default class EventsCreate extends React.Component {
     this.props.discard()
     this.props.history.push('/events')
   }
-
+  // field checks
   checkFields = () => {
     const {
       eventTitle,
@@ -124,7 +123,7 @@ export default class EventsCreate extends React.Component {
 
     this.props.submitEvent(formData)
   }
-
+  // notification behvaiour
   onNotification = (growlNotification) => {
     const alerts = {
       success: {
@@ -163,6 +162,7 @@ export default class EventsCreate extends React.Component {
       <SideBar activeTab='events' title="Create New Event">
         <Card>
 
+          {/* Event Title */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_TITLE}
@@ -178,6 +178,7 @@ export default class EventsCreate extends React.Component {
             </Col>
           </Row>
 
+          {/* Event Dates */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_DATES}
@@ -194,6 +195,7 @@ export default class EventsCreate extends React.Component {
             </Col>
           </Row>
 
+          {/* Event Description */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_DESCRIPTION}
@@ -210,6 +212,7 @@ export default class EventsCreate extends React.Component {
             </Col>
           </Row>
 
+          {/* Event Roles */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.SET_EVENTS_ROLES}
@@ -231,6 +234,7 @@ export default class EventsCreate extends React.Component {
             </Col>
           </Row>
 
+          {/* Event Picture */}
           <Row gutter={[5, 5]}>
             <Col md={20} xs={24}>
               {EventsPhrases.EVENTS_PICTURE}
@@ -248,7 +252,7 @@ export default class EventsCreate extends React.Component {
           </Row>
         </Card>
 
-        {/* Top Row Action Buttons - Discard, Previous, Next */}
+        {/* Button Bar */}
         <Row justify="space-between">
           {/* Discard button */}
           <Col lg={6} md={6} sm={24} xs={24} style={{ marginTop: 10 }}>
@@ -266,7 +270,7 @@ export default class EventsCreate extends React.Component {
             </Popconfirm>
           </Col>
 
-          {/* Previous and Next Buttons for Stepper - Visibility */}
+          {/* Submit Button */}
           <Col lg={18} md={18} sm={24} xs={24} style={{ marginTop: 10 }}>
             <Button
               onClick={this.clickSubmit}

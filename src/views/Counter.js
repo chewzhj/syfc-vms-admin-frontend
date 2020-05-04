@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import 'antd/dist/antd.css'
 import CounterPhrases from '../phrases/CounterPhrases'
 
+// example class to showcase react-redux
 class Counter extends React.Component {
 
   onIncrementValueChange = value => {

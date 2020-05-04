@@ -12,6 +12,7 @@ import { red } from '@ant-design/colors'
 
 export default class ProfileChangePassword extends React.Component {
 
+  // listener for notification
   componentDidUpdate() {
     const { growlMessage } = this.props.profileChangePassword
     if (growlMessage) {
@@ -19,6 +20,7 @@ export default class ProfileChangePassword extends React.Component {
     }
   }
 
+  // state changes
   changeOldPassword = (e) => this.props.changeOldPassword(e.target.value)
   changeNewPassword = (e) => this.props.changeNewPassword(e.target.value)
   changeConfirmPassword = (e) => this.props.changeConfirmPassword(e.target.value)
@@ -26,6 +28,7 @@ export default class ProfileChangePassword extends React.Component {
     this.props.discard()
     this.props.history.push('/profile')
   }
+  // field checks
   checkSubmit = (check) => {
     const {oldPassword} = this.props.profileChangePassword
     const checks = (new Array(2)).fill(false)
@@ -88,7 +91,7 @@ export default class ProfileChangePassword extends React.Component {
 
     this.props.postChangePassword(messageBody)
   }
-
+  // notification handler
   onNotification = (growlNotification) => {
     const alerts = {
       success: {
@@ -171,7 +174,7 @@ export default class ProfileChangePassword extends React.Component {
         </Card>
 
 
-        {/* Top Row Action Buttons - Discard, Previous, Next */}
+        {/* Button Bar*/}
         <Row justify="space-between">
           {/* Discard button */}
           <Col lg={6} md={6} sm={12} xs={24} style={{ marginTop: 10 }}>
@@ -180,7 +183,7 @@ export default class ProfileChangePassword extends React.Component {
               </Button>
           </Col>
 
-          {/* Previous and Next Buttons for Stepper - Visibility */}
+          {/* Submit button */}
           <Col lg={12} md={12} sm={12} xs={24} style={{ marginTop: 10 }}>
             <Button
               onClick={() => this.clickSubmit(confirmed)}
