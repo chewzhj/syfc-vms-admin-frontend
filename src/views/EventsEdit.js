@@ -350,7 +350,7 @@ export default class EventsEdit extends React.Component {
 
           {/* Event Picture - button to open dialog */}
           <Row gutter={[5, 5]}>
-            <Col md={20} xs={24}>
+            <Col span={24}>
               {EventsPhrases.EVENTS_PICTURE}
             </Col>
             <Col>

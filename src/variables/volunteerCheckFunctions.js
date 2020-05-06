@@ -50,7 +50,7 @@ export function checkVolFields(
   if (name.trim() !== '') {
     checks[0] = true
   }
-  if (email.trim() !== '') {
+  if (email.trim() !== '' && email.includes("@")) {
     checks[1] = true
   }
   if (!passwordCheck || password.trim() !== '') {
